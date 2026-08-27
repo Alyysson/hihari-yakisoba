@@ -3,17 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Hikari Yakisoba — Pedido Online</title>
+<title>Hikari Yakisoba - Pedido Online</title>
 
 <style>
 :root{
---red:#ef2028;
---red2:#c80f18;
+--r:#ef2028;
 --bg:#080808;
---panel:#121212;
---text:#fff;
---muted:#aaa;
---line:#292929
+--c:#121212;
+--l:#292929;
+--t:#fff;
+--m:#aaa
 }
 
 *{box-sizing:border-box}
@@ -23,135 +22,124 @@ html{scroll-behavior:smooth}
 body{
 margin:0;
 background:var(--bg);
-color:var(--text);
-font-family:Inter,Arial,sans-serif
+color:var(--t);
+font-family:Arial,Helvetica,sans-serif
 }
 
-button,input,textarea,select{font:inherit}
+button,input,textarea,select{
+font:inherit
+}
+
 button{cursor:pointer}
 
 header{
 position:sticky;
 top:0;
 z-index:20;
-background:rgba(5,5,5,.95);
-backdrop-filter:blur(12px);
-border-bottom:1px solid #1d1d1d
+background:rgba(5,5,5,.96);
+border-bottom:1px solid #222
 }
 
 .nav{
 max-width:1180px;
 margin:auto;
+padding:13px 18px;
 display:flex;
 align-items:center;
-justify-content:space-between;
-padding:13px 18px
+justify-content:space-between
 }
 
 .logo{
-font-weight:900;
 font-size:24px;
-font-style:italic;
-letter-spacing:-1px
+font-weight:900;
+font-style:italic
 }
 
 .logo span{
 display:block;
-color:var(--red);
 font-size:12px;
-margin-top:-4px;
+color:var(--r);
 letter-spacing:1px
 }
 
 .links{
 display:flex;
-gap:25px;
-color:#ddd
+gap:25px
 }
 
 .links a{
-color:inherit;
+color:#ddd;
 text-decoration:none
 }
 
 .cartbtn,.primary{
 border:0;
-background:linear-gradient(135deg,#ff2a31,#cf1018);
+background:var(--r);
 color:#fff;
 font-weight:800;
 border-radius:11px;
-padding:12px 17px;
-box-shadow:0 8px 25px #ef202833
+padding:12px 17px
 }
 
 .hero{
 max-width:1180px;
 margin:auto;
-min-height:440px;
+padding:40px 20px;
 display:grid;
 grid-template-columns:1fr 1.25fr;
 gap:25px;
-align-items:center;
-padding:40px 20px;
-background:radial-gradient(circle at 80% 50%,#3b130d 0,#120b09 25%,transparent 55%)
+align-items:center
 }
 
 .eyebrow{
-color:#ff454b;
+color:var(--r);
 font-weight:800;
 letter-spacing:2px
 }
 
 .hero h1{
-font-size:clamp(54px,8vw,96px);
-line-height:.8;
+font-size:clamp(54px,8vw,90px);
+line-height:.85;
 margin:12px 0;
 font-style:italic
 }
 
 .hero h1 span{
-color:var(--red);
-font-size:.55em;
+color:var(--r);
 display:block;
+font-size:.55em;
 margin-left:70px;
-margin-top:14px
+margin-top:12px
 }
 
 .hero p{
 color:#ddd;
 font-size:18px;
-max-width:470px;
-line-height:1.55
+line-height:1.55;
+max-width:480px
 }
 
 .benefits{
 display:flex;
 gap:18px;
 flex-wrap:wrap;
-color:#eee;
 margin:22px 0
 }
 
 .benefits div{
-border-left:2px solid var(--red);
+border-left:2px solid var(--r);
 padding-left:9px
 }
 
+/* FOTO DESTAQUE - CARNE */
 .heroimg{
 height:340px;
-border-radius:50% 50% 46% 54%;
-background:linear-gradient(145deg,#2b140c,#0a0a0a);
-display:flex;
-align-items:center;
-justify-content:center;
+border-radius:25px;
 overflow:hidden;
-box-shadow:0 25px 80px #000
-}
-
-.heroimg img{
-width:100%;
-height:100%;
-object-fit:cover
+background-image:url("hikari-fotos.png");
+background-size:200% 200%;
+background-position:0% 100%;
+background-repeat:no-repeat
 }
 
 section{
@@ -170,7 +158,7 @@ content:"";
 display:block;
 width:45px;
 height:3px;
-background:var(--red);
+background:var(--r);
 margin-top:8px
 }
 
@@ -180,20 +168,40 @@ grid-template-columns:repeat(4,1fr);
 gap:16px
 }
 
-/* CARD DOS PRATOS */
-
 .card{
 background:linear-gradient(180deg,#171717,#0f0f0f);
-border:1px solid #292929;
+border:1px solid var(--l);
 border-radius:14px;
 overflow:hidden
 }
 
-.card img{
-width:100%;
+/* FOTOS DOS PRATOS */
+
+.foodimg{
 height:175px;
-object-fit:cover;
-background:#222
+background-image:url("hikari-fotos.png");
+background-size:200% 200%;
+background-repeat:no-repeat
+}
+
+/* FRANGO - QUADRANTE SUPERIOR ESQUERDO */
+.frango{
+background-position:0% 0%
+}
+
+/* SUÍNO - QUADRANTE SUPERIOR DIREITO */
+.suino{
+background-position:100% 0%
+}
+
+/* CARNE - QUADRANTE INFERIOR ESQUERDO */
+.carne{
+background-position:0% 100%
+}
+
+/* VEGANO - QUADRANTE INFERIOR DIREITO */
+.vegano{
+background-position:100% 100%
 }
 
 .cardbody{
@@ -206,7 +214,7 @@ font-size:17px
 }
 
 .desc{
-color:#aaa;
+color:var(--m);
 font-size:13px;
 line-height:1.4;
 min-height:55px
@@ -230,9 +238,8 @@ font-weight:700
 }
 
 .size.active{
-background:var(--red);
-border-color:var(--red);
-color:#fff
+background:var(--r);
+border-color:var(--r)
 }
 
 .priceRow{
@@ -253,8 +260,8 @@ width:38px;
 height:38px;
 border-radius:50%;
 border:0;
-background:var(--red);
-color:white;
+background:var(--r);
+color:#fff;
 font-size:25px
 }
 
@@ -270,7 +277,9 @@ align-items:flex-end;
 justify-content:center
 }
 
-.modal.open{display:flex}
+.modal.open{
+display:flex
+}
 
 .drawer{
 width:min(620px,100%);
@@ -409,7 +418,9 @@ display:none;
 z-index:80
 }
 
-.toast.show{display:block}
+.toast.show{
+display:block
+}
 
 /* TABLET */
 
@@ -445,18 +456,13 @@ padding:9px 11px
 font-size:20px
 }
 
-.logo span{
-font-size:10px
-}
-
 .cartbtn{
 padding:9px 11px;
 font-size:12px
 }
 
 .hero{
-padding:25px 13px;
-min-height:0
+padding:25px 13px
 }
 
 .hero h1{
@@ -485,8 +491,7 @@ padding:24px 11px
 }
 
 .sectiontitle{
-font-size:21px;
-margin-bottom:15px
+font-size:21px
 }
 
 .grid{
@@ -498,7 +503,7 @@ gap:9px
 border-radius:11px
 }
 
-.card img{
+.foodimg{
 height:112px
 }
 
@@ -507,8 +512,7 @@ padding:9px
 }
 
 .card h3{
-font-size:14px;
-line-height:1.2
+font-size:14px
 }
 
 .desc{
@@ -536,40 +540,8 @@ height:33px;
 font-size:21px
 }
 
-.priceRow{
-margin-top:8px
 }
 
-.foot{
-padding:20px 12px;
-font-size:12px
-}
-
-}
-
-@media(max-width:380px){
-
-.card img{
-height:103px
-}
-
-.cardbody{
-padding:8px
-}
-
-.card h3{
-font-size:13px
-}
-
-.desc{
-font-size:10px
-}
-
-.size{
-font-size:9px
-}
-
-}
 </style>
 </head>
 
@@ -587,7 +559,6 @@ HIKARI
 <a href="#inicio">Início</a>
 <a href="#cardapio">Cardápio</a>
 <a href="#como">Como funciona</a>
-<a href="#contato">Fale conosco</a>
 </nav>
 
 <button class="cartbtn" onclick="openCart()">
@@ -596,6 +567,7 @@ HIKARI
 
 </div>
 </header>
+
 
 <main>
 
@@ -606,75 +578,86 @@ HIKARI
 <div class="eyebrow">PEDIDO ONLINE</div>
 
 <h1>
-HIKARI
-<span>YAKISOBA 光</span>
+Yakisoba
+<span>de verdade.</span>
 </h1>
 
 <p>
-O verdadeiro yakisoba, preparado na hora com ingredientes selecionados e muito sabor.
+Preparado na hora com ingredientes selecionados e muito sabor.
 </p>
 
 <div class="benefits">
-<div>🥢 Ingredientes frescos</div>
-<div>🔥 Feito na hora</div>
-<div>🛵 Entrega rápida</div>
+<div>🥢 Fresco</div>
+<div>🔥 Na hora</div>
+<div>🛵 Entrega</div>
 </div>
 
-<button class="primary" onclick="document.querySelector('#cardapio').scrollIntoView()">
-🛵 FAZER PEDIDO AGORA
+<button class="primary"
+onclick="document.querySelector('#cardapio').scrollIntoView()">
+FAZER PEDIDO
 </button>
 
 </div>
 
-<div class="heroimg">
-<img
-src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1000&q=85"
-alt="Yakisoba">
-</div>
+<div class="heroimg"></div>
 
 </section>
 
+
 <section id="cardapio">
 
-<div class="sectiontitle">DESTAQUES</div>
+<div class="sectiontitle">
+DESTAQUES
+</div>
 
 <div class="grid" id="productGrid"></div>
 
 </section>
 
+
 <section id="como">
 
-<div class="sectiontitle">COMO FUNCIONA</div>
+<div class="sectiontitle">
+COMO FUNCIONA
+</div>
 
 <div class="grid" style="grid-template-columns:repeat(3,1fr)">
 
 <div class="card">
 <div class="cardbody">
 <h3>1. Escolha</h3>
-<p class="desc">Escolha seu yakisoba e o tamanho de 400 g ou 800 g.</p>
+<p class="desc">
+Escolha seu yakisoba e o tamanho de 400 g ou 800 g.
+</p>
 </div>
 </div>
 
 <div class="card">
 <div class="cardbody">
 <h3>2. Confirme</h3>
-<p class="desc">Informe seus dados e confira o pedido.</p>
+<p class="desc">
+Confira seu pedido e seus dados.
+</p>
 </div>
 </div>
 
 <div class="card">
 <div class="cardbody">
-<h3>3. Pague</h3>
-<p class="desc">Receba as instruções de Pix pelo WhatsApp.</p>
+<h3>3. WhatsApp</h3>
+<p class="desc">
+Envie o pedido diretamente pelo WhatsApp.
+</p>
 </div>
 </div>
 
 </div>
+
 </section>
 
 </main>
 
-<footer id="contato">
+
+<footer>
 
 <div class="foot">
 
@@ -690,12 +673,12 @@ Consulte a região no pedido
 
 <div>
 <strong>💳 Pagamento</strong>
-Pix enviado pelo WhatsApp
+Pix pelo WhatsApp
 </div>
 
 <div>
-<strong>🔒 Segurança</strong>
-Seus dados ficam somente com a Hikari
+<strong>📲 Contato</strong>
+WhatsApp Hikari
 </div>
 
 </div>
@@ -745,18 +728,20 @@ Seus dados ficam somente com a Hikari
 
 <div class="field">
 <label>Endereço</label>
-<textarea id="custAddress" placeholder="Rua, número, bairro"></textarea>
+<textarea id="custAddress"
+placeholder="Rua, número, bairro"></textarea>
 </div>
 
 </div>
 
 <div class="field">
 <label>Observação</label>
-<textarea id="custNote" placeholder="Ex.: sem cebola, pouco molho..."></textarea>
+<textarea id="custNote"
+placeholder="Ex.: sem cebola, pouco molho..."></textarea>
 </div>
 
 <div class="notice">
-Ao confirmar, o pedido será enviado automaticamente para o WhatsApp da Hikari.
+Ao confirmar, o pedido será enviado para o WhatsApp da Hikari.
 </div>
 
 <button
@@ -764,11 +749,12 @@ class="primary"
 style="width:100%;margin-top:12px"
 onclick="sendWhatsApp()">
 
-📲 CONFIRMAR E ENVIAR PELO WHATSAPP
+📲 CONFIRMAR PEDIDO
 
 </button>
 
 </div>
+
 </div>
 
 
@@ -777,15 +763,13 @@ onclick="sendWhatsApp()">
 
 <script>
 
-/* PRODUTOS */
-
 const menu=[
 
 {
 id:"frango",
 name:"Yakisoba Frango",
-desc:"Macarrão de Yakisoba, iscas de filé, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate e molho especial da casa.",
-img:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=800&q=85",
+class:"frango",
+desc:"Macarrão de Yakisoba, iscas de filé, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate, molho especial da casa.",
 sizes:{
 "400 g":24.90,
 "800 g":38.90
@@ -795,8 +779,8 @@ sizes:{
 {
 id:"suino",
 name:"Yakisoba Suíno",
-desc:"Macarrão de Yakisoba, iscas de filé mignon suíno, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate e molho especial da casa.",
-img:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=800&q=85",
+class:"suino",
+desc:"Macarrão de Yakisoba, iscas de filé mignon suíno, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate, molho especial da casa.",
 sizes:{
 "400 g":28.90,
 "800 g":47.90
@@ -805,9 +789,9 @@ sizes:{
 
 {
 id:"carne",
-name:"Yakisoba Carne",
-desc:"Macarrão de Yakisoba, iscas de carne bovina (patinho), cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate e molho especial da casa.",
-img:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=800&q=85",
+name:"Yakisoba Carne bovina",
+class:"carne",
+desc:"Macarrão de Yakisoba, iscas de carne bovina (patinho), cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate, molho especial da casa.",
 sizes:{
 "400 g":37.90,
 "800 g":62.90
@@ -817,8 +801,8 @@ sizes:{
 {
 id:"vegano",
 name:"Yakisoba Vegano",
-desc:"Macarrão de Yakisoba, champignon, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate e molho especial da casa.",
-img:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=800&q=85",
+class:"vegano",
+desc:"Macarrão de Yakisoba, champignon, cenoura, brócolis, couve-flor, repolho roxo, repolho branco, pimentões, cebola roxa, alho, tomate, molho especial da casa.",
 sizes:{
 "400 g":28.90,
 "800 g":47.90
@@ -828,9 +812,16 @@ sizes:{
 ];
 
 
-/* CARRINHO */
+let cart=JSON.parse(
+localStorage.getItem("hikari_cart")||"[]"
+);
 
-let cart=JSON.parse(localStorage.getItem("hikari_cart")||"[]");
+const selectedSize={};
+
+menu.forEach(p=>{
+selectedSize[p.id]="400 g";
+});
+
 
 const BRL=n=>n.toLocaleString("pt-BR",{
 style:"currency",
@@ -839,11 +830,12 @@ currency:"BRL"
 
 
 function saveCart(){
-localStorage.setItem("hikari_cart",JSON.stringify(cart));
+localStorage.setItem(
+"hikari_cart",
+JSON.stringify(cart)
+);
 }
 
-
-/* RENDERIZA CARDÁPIO */
 
 function render(){
 
@@ -853,7 +845,7 @@ menu.map(p=>`
 
 <article class="card">
 
-<img src="${p.img}" alt="${p.name}">
+<div class="foodimg ${p.class}"></div>
 
 <div class="cardbody">
 
@@ -914,34 +906,32 @@ onclick="add('${p.id}')">
 }
 
 
-/* TAMANHO SELECIONADO */
-
-const selectedSize={};
-
-menu.forEach(p=>{
-selectedSize[p.id]="400 g";
-});
-
-
 function selectSize(id,size){
 
 selectedSize[id]=size;
 
-document.getElementById(`size-${id}-400`)
-.classList.toggle("active",size==="400 g");
+document
+.getElementById(`size-${id}-400`)
+.classList.toggle(
+"active",
+size==="400 g"
+);
 
-document.getElementById(`size-${id}-800`)
-.classList.toggle("active",size==="800 g");
+document
+.getElementById(`size-${id}-800`)
+.classList.toggle(
+"active",
+size==="800 g"
+);
 
 const p=menu.find(x=>x.id===id);
 
-document.getElementById(`price-${id}`)
+document
+.getElementById(`price-${id}`)
 .textContent=BRL(p.sizes[size]);
 
 }
 
-
-/* ADICIONAR */
 
 function add(id){
 
@@ -956,42 +946,38 @@ x=>x.id===id && x.size===size
 );
 
 if(item){
-
 item.q++;
-
 }else{
-
 cart.push({
-id:id,
-size:size,
-price:price,
+id,
+size,
+price,
 q:1
 });
-
 }
 
 saveCart();
 renderCart();
 
-toast(`${p.name} ${size} adicionado!`);
+toast(
+`${p.name} ${size} adicionado!`
+);
 
 }
 
 
-/* CARRINHO */
-
 function renderCart(){
 
-let count=cart.reduce(
+const count=cart.reduce(
 (a,b)=>a+b.q,
 0
 );
 
-let total=0;
-
-document.getElementById("cartCount")
+document
+.getElementById("cartCount")
 .textContent=count;
 
+let total=0;
 
 document.getElementById("cartItems").innerHTML=
 
@@ -999,7 +985,9 @@ cart.length?
 
 cart.map((i,index)=>{
 
-const p=menu.find(x=>x.id===i.id);
+const p=menu.find(
+x=>x.id===i.id
+);
 
 const subtotal=i.price*i.q;
 
@@ -1009,7 +997,14 @@ return`
 
 <div class="cartitem">
 
-<img src="${p.img}">
+<div class="foodimg ${p.class}"
+style="
+width:62px;
+height:62px;
+flex:none;
+border-radius:9px
+">
+</div>
 
 <div class="cartinfo">
 
@@ -1051,8 +1046,8 @@ ${BRL(subtotal)}
 Seu pedido está vazio.
 </p>`;
 
-
-document.getElementById("cartTotal")
+document
+.getElementById("cartTotal")
 .textContent=BRL(total);
 
 }
@@ -1063,9 +1058,7 @@ function changeQty(index,d){
 cart[index].q+=d;
 
 if(cart[index].q<=0){
-
 cart.splice(index,1);
-
 }
 
 saveCart();
@@ -1073,8 +1066,6 @@ renderCart();
 
 }
 
-
-/* MODAL */
 
 function openCart(){
 
@@ -1086,6 +1077,7 @@ renderCart();
 
 }
 
+
 function closeCart(){
 
 document
@@ -1095,11 +1087,10 @@ document
 }
 
 
-/* ENTREGA */
-
 function toggleAddress(){
 
-document.getElementById("addressFields")
+document
+.getElementById("addressFields")
 .style.display=
 
 document.getElementById("orderType").value==="Entrega"
@@ -1108,8 +1099,6 @@ document.getElementById("orderType").value==="Entrega"
 
 }
 
-
-/* WHATSAPP */
 
 function sendWhatsApp(){
 
@@ -1155,9 +1144,11 @@ return;
 
 let total=0;
 
-let lines=cart.map(i=>{
+const lines=cart.map(i=>{
 
-const p=menu.find(x=>x.id===i.id);
+const p=menu.find(
+x=>x.id===i.id
+);
 
 const subtotal=i.price*i.q;
 
@@ -1167,13 +1158,9 @@ return `${i.q}x ${p.name} — ${i.size} — ${BRL(subtotal)}`;
 
 }).join("\n");
 
-
-/* NÚMERO DA HIKARI */
-
 const hikariWhatsApp="5551997492824";
 
-
-let message=
+const message=
 `Olá, Hikari! Quero fazer um pedido.
 
 ${lines}
@@ -1186,17 +1173,13 @@ WhatsApp: ${phone}
 ${type==="Entrega"?"Endereço: "+addr:""}
 ${note?"Observação: "+note:""}`;
 
-
 const url=
 `https://wa.me/${hikariWhatsApp}?text=${encodeURIComponent(message)}`;
-
 
 window.open(url,"_blank");
 
 }
 
-
-/* AVISO */
 
 function toast(text){
 
@@ -1214,8 +1197,6 @@ setTimeout(
 
 }
 
-
-/* INÍCIO */
 
 render();
 renderCart();
