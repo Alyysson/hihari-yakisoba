@@ -4,618 +4,129 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hikari Yakisoba — Pedido Online</title>
-
 <style>
-:root{
---red:#ef2028;
---red2:#c80f18;
---bg:#080808;
---panel:#121212;
---panel2:#191919;
---text:#fff;
---muted:#b8b8b8;
---line:#292929;
---green:#20c76a
-}
-
+:root{--red:#ef2028;--red2:#c80f18;--bg:#080808;--panel:#121212;--panel2:#191919;--text:#fff;--muted:#b8b8b8;--line:#292929;--green:#20c76a}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{
-margin:0;
-background:var(--bg);
-color:var(--text);
-font-family:Inter,Arial,sans-serif
-}
-
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 
-header{
-position:sticky;
-top:0;
-z-index:20;
-background:rgba(5,5,5,.94);
-backdrop-filter:blur(12px);
-border-bottom:1px solid #1d1d1d
-}
-
-.nav{
-max-width:1180px;
-margin:auto;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:14px 20px
-}
-
-.logo{
-font-weight:900;
-font-size:25px;
-font-style:italic;
-letter-spacing:-1px
-}
-
-.logo span{
-display:block;
-color:var(--red);
-font-size:13px;
-margin-top:-5px;
-letter-spacing:1px
-}
-
-.links{
-display:flex;
-gap:28px;
-color:#ddd
-}
-
-.links a{
-color:inherit;
-text-decoration:none
-}
-
-.cartbtn,.primary{
-border:0;
-background:linear-gradient(135deg,#ff2a31,#cf1018);
-color:#fff;
-font-weight:800;
-border-radius:11px;
-padding:13px 18px;
-box-shadow:0 8px 25px #ef202833
-}
-
+header{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.94);backdrop-filter:blur(12px);border-bottom:1px solid #1d1d1d}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+.logo{font-weight:900;font-size:25px;font-style:italic;letter-spacing:-1px}
+.logo span{display:block;color:var(--red);font-size:13px;margin-top:-5px;letter-spacing:1px}
+.links{display:flex;gap:28px;color:#ddd}
+.links a{color:inherit;text-decoration:none}
+.cartbtn,.primary{border:0;background:linear-gradient(135deg,#ff2a31,#cf1018);color:#fff;font-weight:800;border-radius:11px;padding:13px 18px;box-shadow:0 8px 25px #ef202833}
 .cartbtn{white-space:nowrap}
 
-.hero{
-max-width:1180px;
-margin:auto;
-min-height:470px;
-display:grid;
-grid-template-columns:1fr 1.25fr;
-gap:25px;
-align-items:center;
-padding:45px 20px;
-background:radial-gradient(circle at 80% 50%,#3b130d 0,#120b09 25%,transparent 55%)
-}
+.hero{max-width:1180px;margin:auto;min-height:470px;display:grid;grid-template-columns:1fr 1.25fr;gap:25px;align-items:center;padding:45px 20px;background:radial-gradient(circle at 80% 50%,#3b130d 0,#120b09 25%,transparent 55%)}
+.eyebrow{color:#ff454b;font-weight:800;letter-spacing:2px}
+.hero h1{font-size:clamp(54px,8vw,96px);line-height:.8;margin:12px 0;font-style:italic}
+.hero h1 span{color:var(--red);font-size:.55em;display:block;margin-left:70px;margin-top:14px}
+.hero p{color:#ddd;font-size:18px;max-width:470px;line-height:1.55}
+.benefits{display:flex;gap:22px;flex-wrap:wrap;color:#eee;margin:25px 0}
+.benefits div{border-left:2px solid var(--red);padding-left:10px}
+.heroimg{height:360px;border-radius:50% 50% 46% 54%;background:linear-gradient(145deg,#2b140c,#0a0a0a);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 25px 80px #000}
+.heroimg img{width:100%;height:100%;object-fit:cover}
 
-.eyebrow{
-color:#ff454b;
-font-weight:800;
-letter-spacing:2px
-}
+section{max-width:1180px;margin:auto;padding:35px 20px}
+.sectiontitle{font-size:25px;margin-bottom:20px}
+.sectiontitle:after{content:"";display:block;width:45px;height:3px;background:var(--red);margin-top:8px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:linear-gradient(180deg,#171717,#0f0f0f);border:1px solid #272727;border-radius:14px;overflow:hidden}
+.card img{width:100%;height:180px;object-fit:cover;background:#222}
+.cardbody{padding:15px}
+.card h3{margin:0 0 8px}
+.desc{color:#aaa;min-height:45px;font-size:14px;line-height:1.4}
+.row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.price{color:#ff3138;font-size:18px;font-weight:900}
+.add{width:40px;height:40px;border-radius:50%;border:0;background:var(--red);color:white;font-size:26px}
 
-.hero h1{
-font-size:clamp(54px,8vw,96px);
-line-height:.8;
-margin:12px 0;
-font-style:italic
-}
+footer{border-top:1px solid #242424;margin-top:35px}
+.foot{max-width:1180px;margin:auto;padding:25px 20px;display:flex;justify-content:space-between;gap:20px;color:#aaa;flex-wrap:wrap}
+.foot strong{color:white;display:block;margin-bottom:5px}
 
-.hero h1 span{
-color:var(--red);
-font-size:.55em;
-display:block;
-margin-left:70px;
-margin-top:14px
-}
-
-.hero p{
-color:#ddd;
-font-size:18px;
-max-width:470px;
-line-height:1.55
-}
-
-.benefits{
-display:flex;
-gap:22px;
-flex-wrap:wrap;
-color:#eee;
-margin:25px 0
-}
-
-.benefits div{
-border-left:2px solid var(--red);
-padding-left:10px
-}
-
-.heroimg{
-height:360px;
-border-radius:50% 50% 46% 54%;
-background:linear-gradient(145deg,#2b140c,#0a0a0a);
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-box-shadow:0 25px 80px #000
-}
-
-.heroimg img{
-width:100%;
-height:100%;
-object-fit:cover
-}
-
-section{
-max-width:1180px;
-margin:auto;
-padding:35px 20px
-}
-
-.sectiontitle{
-font-size:25px;
-margin-bottom:20px
-}
-
-.sectiontitle:after{
-content:"";
-display:block;
-width:45px;
-height:3px;
-background:var(--red);
-margin-top:8px
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:16px
-}
-
-/* PRATOS - APENAS APARÊNCIA */
-.card{
-background:linear-gradient(180deg,#171717,#0f0f0f);
-border:1px solid #272727;
-border-radius:14px;
-overflow:hidden;
-transition:transform .2s ease,box-shadow .2s ease
-}
-
-.card:hover{
-transform:translateY(-3px);
-box-shadow:0 10px 30px #000
-}
-
-.card img{
-width:100%;
-height:155px;
-object-fit:cover;
-background:#222
-}
-
-.cardbody{
-padding:13px
-}
-
-.card h3{
-margin:0 0 7px;
-font-size:16px
-}
-
-.desc{
-color:#aaa;
-min-height:42px;
-font-size:13px;
-line-height:1.4
-}
-
-.row{
-display:flex;
-align-items:center;
-justify-content:space-between;
-margin-top:12px
-}
-
-.price{
-color:#ff3138;
-font-size:17px;
-font-weight:900
-}
-
-.add{
-width:38px;
-height:38px;
-border-radius:50%;
-border:0;
-background:var(--red);
-color:white;
-font-size:25px
-}
-
-footer{
-border-top:1px solid #242424;
-margin-top:35px
-}
-
-.foot{
-max-width:1180px;
-margin:auto;
-padding:25px 20px;
-display:flex;
-justify-content:space-between;
-gap:20px;
-color:#aaa;
-flex-wrap:wrap
-}
-
-.foot strong{
-color:white;
-display:block;
-margin-bottom:5px
-}
-
-.modal{
-position:fixed;
-inset:0;
-background:#000b;
-z-index:50;
-display:none;
-align-items:flex-end;
-justify-content:center
-}
-
+.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center}
 .modal.open{display:flex}
-
-.drawer{
-width:min(620px,100%);
-max-height:92vh;
-overflow:auto;
-background:#111;
-border:1px solid #292929;
-border-radius:20px 20px 0 0;
-padding:22px
-}
-
+.drawer{width:min(620px,100%);max-height:92vh;overflow:auto;background:#111;border:1px solid #292929;border-radius:20px 20px 0 0;padding:22px}
 .drawer h2{margin-top:0}
-
-.close{
-float:right;
-border:0;
-background:#252525;
-color:#fff;
-border-radius:9px;
-padding:8px 12px
-}
-
-.cartitem{
-display:flex;
-gap:12px;
-border-bottom:1px solid #292929;
-padding:14px 0
-}
-
-.cartitem img{
-width:64px;
-height:64px;
-object-fit:cover;
-border-radius:9px
-}
-
-.qty{
-display:flex;
-align-items:center;
-gap:8px
-}
-
-.qty button{
-width:28px;
-height:28px;
-border-radius:7px;
-border:1px solid #444;
-background:#222;
-color:#fff
-}
-
-.total{
-display:flex;
-justify-content:space-between;
-font-size:20px;
-font-weight:900;
-padding:18px 0
-}
-
+.close{float:right;border:0;background:#252525;color:#fff;border-radius:9px;padding:8px 12px}
+.cartitem{display:flex;gap:12px;border-bottom:1px solid #292929;padding:14px 0}
+.cartitem img{width:64px;height:64px;object-fit:cover;border-radius:9px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:7px;border:1px solid #444;background:#222;color:#fff}
+.total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;padding:18px 0}
 .field{margin:10px 0}
+.field label{display:block;color:#bbb;font-size:13px;margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#191919;color:#fff}
+.field textarea{min-height:80px;resize:vertical}
+.notice{background:#151515;border:1px solid #2b2b2b;padding:12px;border-radius:10px;color:#bbb;font-size:13px}
 
-.field label{
-display:block;
-color:#bbb;
-font-size:13px;
-margin-bottom:5px
-}
-
-.field input,
-.field textarea,
-.field select{
-width:100%;
-padding:12px;
-border-radius:9px;
-border:1px solid #333;
-background:#191919;
-color:#fff
-}
-
-.field textarea{
-min-height:80px;
-resize:vertical
-}
-
-.notice{
-background:#151515;
-border:1px solid #2b2b2b;
-padding:12px;
-border-radius:10px;
-color:#bbb;
-font-size:13px
-}
-
-.admin{
-max-width:1180px;
-margin:auto;
-padding:35px 20px;
-display:none
-}
-
+.admin{max-width:1180px;margin:auto;padding:35px 20px;display:none}
 .admin.active{display:block}
-
-.adminbar{
-display:flex;
-justify-content:space-between;
-gap:10px;
-align-items:center;
-margin-bottom:20px
-}
-
-.productrow{
-display:grid;
-grid-template-columns:80px 1fr auto auto;
-gap:14px;
-align-items:center;
-background:#131313;
-border:1px solid #292929;
-border-radius:12px;
-padding:10px;
-margin:8px 0
-}
-
-.productrow img{
-width:80px;
-height:65px;
-object-fit:cover;
-border-radius:8px
-}
-
-.actions{
-display:flex;
-gap:7px
-}
-
-.secondary,.danger{
-border:1px solid #3a3a3a;
-background:#1d1d1d;
-color:#fff;
-border-radius:8px;
-padding:9px 12px
-}
-
-.danger{
-border-color:#5b2020;
-color:#ff7777
-}
-
-.adminform{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-background:#131313;
-padding:18px;
-border-radius:14px;
-margin-top:18px
-}
-
-.adminform .full{
-grid-column:1/-1
-}
-
+.adminbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:20px}
+.productrow{display:grid;grid-template-columns:80px 1fr auto auto;gap:14px;align-items:center;background:#131313;border:1px solid #292929;border-radius:12px;padding:10px;margin:8px 0}
+.productrow img{width:80px;height:65px;object-fit:cover;border-radius:8px}
+.actions{display:flex;gap:7px}
+.secondary,.danger{border:1px solid #3a3a3a;background:#1d1d1d;color:#fff;border-radius:8px;padding:9px 12px}
+.danger{border-color:#5b2020;color:#ff7777}
+.adminform{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#131313;padding:18px;border-radius:14px;margin-top:18px}
+.adminform .full{grid-column:1/-1}
 .adminform button{margin-top:5px}
-
-.hidden{
-display:none!important
-}
-
-.toast{
-position:fixed;
-right:18px;
-bottom:18px;
-background:#181818;
-border:1px solid #333;
-padding:13px 16px;
-border-radius:10px;
-display:none;
-z-index:80
-}
-
+.hidden{display:none!important}
+.toast{position:fixed;right:18px;bottom:18px;background:#181818;border:1px solid #333;padding:13px 16px;border-radius:10px;display:none;z-index:80}
 .toast.show{display:block}
 
+/* COMPUTADOR / TABLET */
 @media(max-width:900px){
-.grid{
-grid-template-columns:repeat(2,1fr)
+.grid{grid-template-columns:repeat(2,1fr)}
+.hero{grid-template-columns:1fr}
+.heroimg{height:280px}
+.links{display:none}
 }
 
-.hero{
-grid-template-columns:1fr
-}
-
-.heroimg{
-height:280px
-}
-
-.links{
-display:none
-}
-}
-
-/* CELULAR - PRATOS MENORES E MAIS BONITOS */
+/* CELULAR — SOMENTE APARÊNCIA DOS PRATOS */
 @media(max-width:600px){
+.grid{grid-template-columns:repeat(2,1fr);gap:9px}
+.nav{padding:10px 12px}
+.logo{font-size:21px}
+.logo span{font-size:11px}
+.cartbtn{padding:9px 11px;font-size:12px}
+.hero{padding:28px 14px}
+.hero h1{font-size:50px}
+.hero h1 span{margin-left:25px}
+.hero p{font-size:15px}
+.benefits{gap:8px;font-size:13px}
+.heroimg{height:220px}
+section{padding:25px 12px}
+.sectiontitle{font-size:21px;margin-bottom:15px}
 
-.grid{
-grid-template-columns:repeat(2,1fr);
-gap:9px
-}
+/* PRATOS MENORES */
+.card{border-radius:11px}
+.card img{height:115px}
+.cardbody{padding:9px}
+.card h3{font-size:14px;line-height:1.2;margin-bottom:5px}
+.desc{font-size:11px;line-height:1.3;min-height:38px}
+.row{margin-top:8px}
+.price{font-size:15px}
+.add{width:34px;height:34px;font-size:22px}
 
-.nav{
-padding:10px 12px
-}
-
-.logo{
-font-size:21px
-}
-
-.logo span{
-font-size:11px
-}
-
-.hero{
-padding:28px 14px
-}
-
-.hero h1{
-font-size:50px
-}
-
-.hero h1 span{
-margin-left:25px
-}
-
-.hero p{
-font-size:15px
-}
-
-.benefits{
-gap:8px;
-font-size:13px
-}
-
-.heroimg{
-height:220px
-}
-
-section{
-padding:25px 12px
-}
-
-.sectiontitle{
-font-size:21px;
-margin-bottom:15px
-}
-
-/* SOMENTE VISUAL DOS PRATOS */
-.card{
-border-radius:11px
-}
-
-.card img{
-height:115px
-}
-
-.cardbody{
-padding:9px
-}
-
-.card h3{
-font-size:14px;
-line-height:1.2;
-margin-bottom:5px
-}
-
-.desc{
-font-size:11px;
-line-height:1.3;
-min-height:38px
-}
-
-.row{
-margin-top:8px
-}
-
-.price{
-font-size:15px
-}
-
-.add{
-width:34px;
-height:34px;
-font-size:22px
-}
-
-.productrow{
-grid-template-columns:60px 1fr
-}
-
-.productrow img{
-width:60px;
-height:55px
-}
-
-.productrow .actions{
-grid-column:2
-}
-
-.adminform{
-grid-template-columns:1fr
-}
-
-.adminform .full{
-grid-column:auto
-}
+.productrow{grid-template-columns:60px 1fr}
+.productrow img{width:60px;height:55px}
+.productrow .actions{grid-column:2}
+.adminform{grid-template-columns:1fr}
+.adminform .full{grid-column:auto}
 }
 
 @media(max-width:380px){
-
-.card img{
-height:105px
-}
-
-.cardbody{
-padding:8px
-}
-
-.card h3{
-font-size:13px
-}
-
-.desc{
-font-size:10px
-}
-
-.price{
-font-size:14px
-}
-
-.add{
-width:32px;
-height:32px;
-font-size:21px
-}
+.card img{height:105px}
+.cardbody{padding:8px}
+.card h3{font-size:13px}
+.desc{font-size:10px}
+.price{font-size:14px}
+.add{width:32px;height:32px;font-size:21px}
 }
 </style>
 </head>
@@ -626,8 +137,7 @@ font-size:21px
 <div class="nav">
 
 <a href="#" class="logo" style="text-decoration:none;color:#fff">
-HIKARI
-<span>YAKISOBA 光</span>
+HIKARI<span>YAKISOBA 光</span>
 </a>
 
 <nav class="links">
@@ -652,10 +162,7 @@ HIKARI
 <div>
 <div class="eyebrow">PEDIDO ONLINE</div>
 
-<h1>
-HIKARI
-<span>YAKISOBA 光</span>
-</h1>
+<h1>HIKARI<span>YAKISOBA 光</span></h1>
 
 <p>
 O verdadeiro yakisoba, preparado na hora com ingredientes selecionados e muito sabor.
@@ -670,23 +177,17 @@ O verdadeiro yakisoba, preparado na hora com ingredientes selecionados e muito s
 <button class="primary" onclick="document.querySelector('#cardapio').scrollIntoView()">
 🛵 FAZER PEDIDO AGORA
 </button>
-
 </div>
 
 <div class="heroimg">
-<img id="heroImage"
-src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1000&q=85"
-alt="Yakisoba">
+<img id="heroImage" src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1000&q=85" alt="Yakisoba">
 </div>
 
 </section>
 
 <section id="cardapio">
-
 <div class="sectiontitle">DESTAQUES</div>
-
 <div class="grid" id="productGrid"></div>
-
 </section>
 
 <section id="como">
@@ -784,7 +285,6 @@ alt="Yakisoba">
 </div>
 
 </form>
-
 </section>
 
 <footer id="contato">
@@ -812,7 +312,6 @@ Seus dados ficam somente com a Hikari
 </div>
 
 </div>
-
 </footer>
 
 <div class="modal" id="cartModal">
@@ -837,7 +336,6 @@ Seus dados ficam somente com a Hikari
 <option value="Entrega">Entrega</option>
 <option value="Retirada">Retirada no balcão</option>
 </select>
-
 </div>
 
 <div id="addressFields">
@@ -882,8 +380,7 @@ Ao confirmar, o pedido será montado automaticamente e enviado para o WhatsApp d
 <div style="text-align:center;margin-bottom:18px">
 
 <div class="logo" style="display:inline-block">
-HIKARI
-<span>YAKISOBA 光</span>
+HIKARI<span>YAKISOBA 光</span>
 </div>
 
 <h2 style="margin-bottom:5px">Painel Administrativo</h2>
@@ -937,25 +434,15 @@ function render(){
 
 document.getElementById("productGrid").innerHTML=products.map(p=>`
 <article class="card">
-
 <img src="${p.img}" alt="${esc(p.name)}">
-
 <div class="cardbody">
-
 <h3>${esc(p.name)}</h3>
-
 <div class="desc">${esc(p.desc)}</div>
-
 <div class="row">
-
 <span class="price">${BRL(p.price)}</span>
-
 <button class="add" onclick="add(${p.id})">+</button>
-
 </div>
-
 </div>
-
 </article>
 `).join("");
 
@@ -1005,27 +492,16 @@ total+=p.price*i.q;
 
 return`
 <div class="cartitem">
-
 <img src="${p.img}">
-
 <div style="flex:1">
-
 <b>${esc(p.name)}</b>
-
 <div>${BRL(p.price)}</div>
-
 <div class="qty">
-
 <button onclick="changeQty(${p.id},-1)">−</button>
-
 <span>${i.q}</span>
-
 <button onclick="changeQty(${p.id},1)">+</button>
-
 </div>
-
 </div>
-
 </div>
 `
 
@@ -1087,20 +563,16 @@ return`${i.q}x ${p.name} — ${BRL(p.price*i.q)}`
 }).join("%0A");
 
 let type=document.getElementById("orderType").value;
-
 let name=document.getElementById("custName").value.trim();
-
 let phone=document.getElementById("custPhone").value.trim();
-
 let addr=document.getElementById("custAddress").value.trim();
-
 let note=document.getElementById("custNote").value.trim();
 
 if(!name||!phone||(type==="Entrega"&&!addr))
 return toast("Preencha os dados do pedido.");
 
-const hikariWhatsApp=
-localStorage.getItem("hikari_whatsapp")||"5551999999999";
+/* WHATSAPP DA HIKARI */
+const hikariWhatsApp="5551997492824";
 
 let msg=
 `Olá, Hikari! Quero fazer um pedido.%0A%0A${lines}%0A%0ATotal: ${BRL(total)}%0ATipo: ${type}%0ANome: ${encodeURIComponent(name)}%0AWhatsApp: ${encodeURIComponent(phone)}%0A${type==="Entrega"?"Endereço: "+encodeURIComponent(addr)+"%0A":""}${note?"Observação: "+encodeURIComponent(note):""}`;
@@ -1183,7 +655,7 @@ behavior:"smooth"
 
 }
 
-function saveProduct(e){
+async function saveProduct(e){
 
 e.preventDefault();
 
@@ -1204,7 +676,6 @@ const send=async(img)=>{
 p.img=img||"";
 
 const url=id?`/api/products/${id}`:"/api/products";
-
 const method=id?"PUT":"POST";
 
 const r=await fetch(url,{
@@ -1240,22 +711,21 @@ function cancelEdit(){
 document.getElementById("productForm").classList.add("hidden")
 }
 
-function deleteProduct(id){
+async function deleteProduct(id){
 
 let p=products.find(x=>x.id===id);
 
 if(confirm(`Excluir "${p.name}"?`)){
 
-fetch(`/api/products/${id}`,{
+const r=await fetch(`/api/products/${id}`,{
 method:"DELETE"
-}).then(r=>{
+});
 
 if(r.ok){
 
 cart=cart.filter(x=>x.id!==id);
-
 save();
-loadProducts();
+await loadProducts();
 toast("Produto excluído.")
 
 }else{
@@ -1263,8 +733,6 @@ toast("Produto excluído.")
 toast("Não foi possível excluir.")
 
 }
-
-})
 
 }
 
@@ -1275,7 +743,6 @@ function toast(t){
 let x=document.getElementById("toast");
 
 x.textContent=t;
-
 x.classList.add("show");
 
 setTimeout(
@@ -1322,7 +789,6 @@ document.getElementById("loginError").style.display="none"
 async function doLogin(){
 
 const u=document.getElementById("loginUser").value.trim();
-
 const p=document.getElementById("loginPass").value;
 
 try{
@@ -1344,7 +810,6 @@ throw new Error();
 sessionStorage.setItem("hikari_admin","1");
 
 closeLogin();
-
 showAdmin();
 
 }catch(e){
@@ -1365,9 +830,7 @@ return
 }
 
 document.getElementById("site").classList.add("hidden");
-
 document.getElementById("admin").classList.add("active");
-
 document.getElementById("contato").classList.add("hidden");
 
 await loadProducts();
@@ -1387,9 +850,7 @@ method:"POST"
 sessionStorage.removeItem("hikari_admin");
 
 document.getElementById("site").classList.remove("hidden");
-
 document.getElementById("admin").classList.remove("active");
-
 document.getElementById("contato").classList.remove("hidden");
 
 toast("Você saiu do painel.")
