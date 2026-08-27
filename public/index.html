@@ -131,14 +131,14 @@ border-left:2px solid var(--r);
 padding-left:9px
 }
 
-/* FOTO DESTAQUE - CARNE */
+/* DESTAQUE - CARNE */
 .heroimg{
 height:340px;
 border-radius:25px;
 overflow:hidden;
-background-image:url("hikari-fotos.png");
-background-size:200% 200%;
-background-position:0% 100%;
+background-image:url("carne.jpg.png");
+background-size:cover;
+background-position:center;
 background-repeat:no-repeat
 }
 
@@ -175,33 +175,28 @@ border-radius:14px;
 overflow:hidden
 }
 
-/* FOTOS DOS PRATOS */
-
+/* FOTOS */
 .foodimg{
 height:175px;
-background-image:url("hikari-fotos.png");
-background-size:200% 200%;
+background-size:cover;
+background-position:center;
 background-repeat:no-repeat
 }
 
-/* FRANGO - QUADRANTE SUPERIOR ESQUERDO */
 .frango{
-background-position:0% 0%
+background-image:url("frango.jpg.png");
 }
 
-/* SUÍNO - QUADRANTE SUPERIOR DIREITO */
 .suino{
-background-position:100% 0%
+background-image:url("suino.jpg.png");
 }
 
-/* CARNE - QUADRANTE INFERIOR ESQUERDO */
 .carne{
-background-position:0% 100%
+background-image:url("carne.jpg.png");
 }
 
-/* VEGANO - QUADRANTE INFERIOR DIREITO */
 .vegano{
-background-position:100% 100%
+background-image:url("vegano.jpg.png");
 }
 
 .cardbody{
@@ -305,13 +300,6 @@ display:flex;
 gap:12px;
 border-bottom:1px solid #292929;
 padding:14px 0
-}
-
-.cartitem img{
-width:62px;
-height:62px;
-object-fit:cover;
-border-radius:9px
 }
 
 .cartinfo{
@@ -568,7 +556,6 @@ HIKARI
 </div>
 </header>
 
-
 <main>
 
 <section class="hero" id="inicio">
@@ -603,7 +590,6 @@ FAZER PEDIDO
 
 </section>
 
-
 <section id="cardapio">
 
 <div class="sectiontitle">
@@ -613,7 +599,6 @@ DESTAQUES
 <div class="grid" id="productGrid"></div>
 
 </section>
-
 
 <section id="como">
 
@@ -656,7 +641,6 @@ Envie o pedido diretamente pelo WhatsApp.
 
 </main>
 
-
 <footer>
 
 <div class="foot">
@@ -684,7 +668,6 @@ WhatsApp Hikari
 </div>
 
 </footer>
-
 
 <!-- CARRINHO -->
 
@@ -757,9 +740,7 @@ onclick="sendWhatsApp()">
 
 </div>
 
-
 <div class="toast" id="toast"></div>
-
 
 <script>
 
@@ -811,7 +792,6 @@ sizes:{
 
 ];
 
-
 let cart=JSON.parse(
 localStorage.getItem("hikari_cart")||"[]"
 );
@@ -822,12 +802,10 @@ menu.forEach(p=>{
 selectedSize[p.id]="400 g";
 });
 
-
 const BRL=n=>n.toLocaleString("pt-BR",{
 style:"currency",
 currency:"BRL"
 });
-
 
 function saveCart(){
 localStorage.setItem(
@@ -835,7 +813,6 @@ localStorage.setItem(
 JSON.stringify(cart)
 );
 }
-
 
 function render(){
 
@@ -905,7 +882,6 @@ onclick="add('${p.id}')">
 
 }
 
-
 function selectSize(id,size){
 
 selectedSize[id]=size;
@@ -931,7 +907,6 @@ document
 .textContent=BRL(p.sizes[size]);
 
 }
-
 
 function add(id){
 
@@ -964,7 +939,6 @@ toast(
 );
 
 }
-
 
 function renderCart(){
 
@@ -1052,7 +1026,6 @@ document
 
 }
 
-
 function changeQty(index,d){
 
 cart[index].q+=d;
@@ -1066,7 +1039,6 @@ renderCart();
 
 }
 
-
 function openCart(){
 
 document
@@ -1077,7 +1049,6 @@ renderCart();
 
 }
 
-
 function closeCart(){
 
 document
@@ -1085,7 +1056,6 @@ document
 .classList.remove("open");
 
 }
-
 
 function toggleAddress(){
 
@@ -1098,7 +1068,6 @@ document.getElementById("orderType").value==="Entrega"
 :"none";
 
 }
-
 
 function sendWhatsApp(){
 
@@ -1180,7 +1149,6 @@ window.open(url,"_blank");
 
 }
 
-
 function toast(text){
 
 const el=
@@ -1196,7 +1164,6 @@ setTimeout(
 );
 
 }
-
 
 render();
 renderCart();
