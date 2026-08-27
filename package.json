@@ -1,0 +1,9 @@
+{
+  "name": "hikari-yakisoba",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site de pedidos pr\u00f3prio da Hikari Yakisoba com painel administrativo seguro",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

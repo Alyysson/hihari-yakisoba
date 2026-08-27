@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Yakisoba Frango",
+    "desc": "Macarrão, frango, legumes selecionados e nosso molho especial.",
+    "price": 29.9,
+    "cat": "Yakisoba",
+    "img": "https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=700&q=85"
+  },
+  {
+    "id": 2,
+    "name": "Yakisoba Carne",
+    "desc": "Macarrão, carne, legumes selecionados e nosso molho especial.",
+    "price": 31.9,
+    "cat": "Yakisoba",
+    "img": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=700&q=85"
+  },
+  {
+    "id": 3,
+    "name": "Yakisoba Misto",
+    "desc": "Macarrão, frango, carne, legumes e nosso molho especial.",
+    "price": 33.9,
+    "cat": "Yakisoba",
+    "img": "https://images.unsplash.com/photo-1552611052-33e04de081de?auto=format&fit=crop&w=700&q=85"
+  },
+  {
+    "id": 4,
+    "name": "Yakisoba Vegetariano",
+    "desc": "Macarrão, legumes selecionados e nosso molho especial.",
+    "price": 28.9,
+    "cat": "Yakisoba",
+    "img": "https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=700&q=85"
+  },
+  {
+    "id": 5,
+    "name": "Coca-Cola 350ml",
+    "desc": "Lata 350ml.",
+    "price": 6.0,
+    "cat": "Bebidas",
+    "img": "https://images.unsplash.com/photo-1554866585-cd94860890b7?auto=format&fit=crop&w=700&q=85"
+  }
+]
