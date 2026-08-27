@@ -4,189 +4,1170 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Hikari Yakisoba — Pedido Online</title>
-<style>
-:root{--red:#ef2028;--red2:#c80f18;--bg:#080808;--panel:#121212;--panel2:#191919;--text:#fff;--muted:#b8b8b8;--line:#292929;--green:#20c76a}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
-header{position:sticky;top:0;z-index:20;background:rgba(5,5,5,.94);backdrop-filter:blur(12px);border-bottom:1px solid #1d1d1d}
-.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:14px 20px}.logo{font-weight:900;font-size:25px;font-style:italic;letter-spacing:-1px}.logo span{display:block;color:var(--red);font-size:13px;margin-top:-5px;letter-spacing:1px}.links{display:flex;gap:28px;color:#ddd}.links a{color:inherit;text-decoration:none}.cartbtn,.primary{border:0;background:linear-gradient(135deg,#ff2a31,#cf1018);color:#fff;font-weight:800;border-radius:11px;padding:13px 18px;box-shadow:0 8px 25px #ef202833}.cartbtn{white-space:nowrap}
-.hero{max-width:1180px;margin:auto;min-height:470px;display:grid;grid-template-columns:1fr 1.25fr;gap:25px;align-items:center;padding:45px 20px;background:radial-gradient(circle at 80% 50%,#3b130d 0,#120b09 25%,transparent 55%)}.eyebrow{color:#ff454b;font-weight:800;letter-spacing:2px}.hero h1{font-size:clamp(54px,8vw,96px);line-height:.8;margin:12px 0;font-style:italic}.hero h1 span{color:var(--red);font-size:.55em;display:block;margin-left:70px;margin-top:14px}.hero p{color:#ddd;font-size:18px;max-width:470px;line-height:1.55}.benefits{display:flex;gap:22px;flex-wrap:wrap;color:#eee;margin:25px 0}.benefits div{border-left:2px solid var(--red);padding-left:10px}.heroimg{height:360px;border-radius:50% 50% 46% 54%;background:linear-gradient(145deg,#2b140c,#0a0a0a);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 25px 80px #000}.heroimg img{width:100%;height:100%;object-fit:cover}
-section{max-width:1180px;margin:auto;padding:35px 20px}.sectiontitle{font-size:25px;margin-bottom:20px}.sectiontitle:after{content:"";display:block;width:45px;height:3px;background:var(--red);margin-top:8px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.card{background:linear-gradient(180deg,#171717,#0f0f0f);border:1px solid #272727;border-radius:14px;overflow:hidden}.card img{width:100%;height:180px;object-fit:cover;background:#222}.cardbody{padding:15px}.card h3{margin:0 0 8px}.desc{color:#aaa;min-height:45px;font-size:14px;line-height:1.4}.row{display:flex;align-items:center;justify-content:space-between;margin-top:14px}.price{color:#ff3138;font-size:18px;font-weight:900}.add{width:40px;height:40px;border-radius:50%;border:0;background:var(--red);color:white;font-size:26px}
-footer{border-top:1px solid #242424;margin-top:35px}.foot{max-width:1180px;margin:auto;padding:25px 20px;display:flex;justify-content:space-between;gap:20px;color:#aaa;flex-wrap:wrap}.foot strong{color:white;display:block;margin-bottom:5px}
-.modal{position:fixed;inset:0;background:#000b;z-index:50;display:none;align-items:flex-end;justify-content:center}.modal.open{display:flex}.drawer{width:min(620px,100%);max-height:92vh;overflow:auto;background:#111;border:1px solid #292929;border-radius:20px 20px 0 0;padding:22px}.drawer h2{margin-top:0}.close{float:right;border:0;background:#252525;color:#fff;border-radius:9px;padding:8px 12px}.cartitem{display:flex;gap:12px;border-bottom:1px solid #292929;padding:14px 0}.cartitem img{width:64px;height:64px;object-fit:cover;border-radius:9px}.qty{display:flex;align-items:center;gap:8px}.qty button{width:28px;height:28px;border-radius:7px;border:1px solid #444;background:#222;color:#fff}.total{display:flex;justify-content:space-between;font-size:20px;font-weight:900;padding:18px 0}.field{margin:10px 0}.field label{display:block;color:#bbb;font-size:13px;margin-bottom:5px}.field input,.field textarea,.field select{width:100%;padding:12px;border-radius:9px;border:1px solid #333;background:#191919;color:#fff}.field textarea{min-height:80px;resize:vertical}.notice{background:#151515;border:1px solid #2b2b2b;padding:12px;border-radius:10px;color:#bbb;font-size:13px}
-.admin{max-width:1180px;margin:auto;padding:35px 20px;display:none}.admin.active{display:block}.adminbar{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:20px}.productrow{display:grid;grid-template-columns:80px 1fr auto auto;gap:14px;align-items:center;background:#131313;border:1px solid #292929;border-radius:12px;padding:10px;margin:8px 0}.productrow img{width:80px;height:65px;object-fit:cover;border-radius:8px}.actions{display:flex;gap:7px}.secondary,.danger{border:1px solid #3a3a3a;background:#1d1d1d;color:#fff;border-radius:8px;padding:9px 12px}.danger{border-color:#5b2020;color:#ff7777}.adminform{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#131313;padding:18px;border-radius:14px;margin-top:18px}.adminform .full{grid-column:1/-1}.adminform button{margin-top:5px}
-.hidden{display:none!important}.toast{position:fixed;right:18px;bottom:18px;background:#181818;border:1px solid #333;padding:13px 16px;border-radius:10px;display:none;z-index:80}.toast.show{display:block}
 
-@media(max-width:900px){
-.grid{grid-template-columns:repeat(2,1fr)}
-.hero{grid-template-columns:1fr;padding:30px 16px}
-.heroimg{height:220px}
-.links{display:none}
+<style>
+:root{
+--red:#ef2028;
+--red2:#c80f18;
+--bg:#080808;
+--panel:#121212;
+--panel2:#191919;
+--text:#fff;
+--muted:#b8b8b8;
+--line:#292929;
+--green:#20c76a
 }
 
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+margin:0;
+background:var(--bg);
+color:var(--text);
+font-family:Inter,Arial,sans-serif
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+
+header{
+position:sticky;
+top:0;
+z-index:20;
+background:rgba(5,5,5,.94);
+backdrop-filter:blur(12px);
+border-bottom:1px solid #1d1d1d
+}
+
+.nav{
+max-width:1180px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:14px 20px
+}
+
+.logo{
+font-weight:900;
+font-size:25px;
+font-style:italic;
+letter-spacing:-1px
+}
+
+.logo span{
+display:block;
+color:var(--red);
+font-size:13px;
+margin-top:-5px;
+letter-spacing:1px
+}
+
+.links{
+display:flex;
+gap:28px;
+color:#ddd
+}
+
+.links a{
+color:inherit;
+text-decoration:none
+}
+
+.cartbtn,.primary{
+border:0;
+background:linear-gradient(135deg,#ff2a31,#cf1018);
+color:#fff;
+font-weight:800;
+border-radius:11px;
+padding:13px 18px;
+box-shadow:0 8px 25px #ef202833
+}
+
+.cartbtn{white-space:nowrap}
+
+.hero{
+max-width:1180px;
+margin:auto;
+min-height:470px;
+display:grid;
+grid-template-columns:1fr 1.25fr;
+gap:25px;
+align-items:center;
+padding:45px 20px;
+background:radial-gradient(circle at 80% 50%,#3b130d 0,#120b09 25%,transparent 55%)
+}
+
+.eyebrow{
+color:#ff454b;
+font-weight:800;
+letter-spacing:2px
+}
+
+.hero h1{
+font-size:clamp(54px,8vw,96px);
+line-height:.8;
+margin:12px 0;
+font-style:italic
+}
+
+.hero h1 span{
+color:var(--red);
+font-size:.55em;
+display:block;
+margin-left:70px;
+margin-top:14px
+}
+
+.hero p{
+color:#ddd;
+font-size:18px;
+max-width:470px;
+line-height:1.55
+}
+
+.benefits{
+display:flex;
+gap:22px;
+flex-wrap:wrap;
+color:#eee;
+margin:25px 0
+}
+
+.benefits div{
+border-left:2px solid var(--red);
+padding-left:10px
+}
+
+.heroimg{
+height:360px;
+border-radius:50% 50% 46% 54%;
+background:linear-gradient(145deg,#2b140c,#0a0a0a);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+box-shadow:0 25px 80px #000
+}
+
+.heroimg img{
+width:100%;
+height:100%;
+object-fit:cover
+}
+
+section{
+max-width:1180px;
+margin:auto;
+padding:35px 20px
+}
+
+.sectiontitle{
+font-size:25px;
+margin-bottom:20px
+}
+
+.sectiontitle:after{
+content:"";
+display:block;
+width:45px;
+height:3px;
+background:var(--red);
+margin-top:8px
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:16px
+}
+
+/* PRATOS - APENAS APARÊNCIA */
+.card{
+background:linear-gradient(180deg,#171717,#0f0f0f);
+border:1px solid #272727;
+border-radius:14px;
+overflow:hidden;
+transition:transform .2s ease,box-shadow .2s ease
+}
+
+.card:hover{
+transform:translateY(-3px);
+box-shadow:0 10px 30px #000
+}
+
+.card img{
+width:100%;
+height:155px;
+object-fit:cover;
+background:#222
+}
+
+.cardbody{
+padding:13px
+}
+
+.card h3{
+margin:0 0 7px;
+font-size:16px
+}
+
+.desc{
+color:#aaa;
+min-height:42px;
+font-size:13px;
+line-height:1.4
+}
+
+.row{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-top:12px
+}
+
+.price{
+color:#ff3138;
+font-size:17px;
+font-weight:900
+}
+
+.add{
+width:38px;
+height:38px;
+border-radius:50%;
+border:0;
+background:var(--red);
+color:white;
+font-size:25px
+}
+
+footer{
+border-top:1px solid #242424;
+margin-top:35px
+}
+
+.foot{
+max-width:1180px;
+margin:auto;
+padding:25px 20px;
+display:flex;
+justify-content:space-between;
+gap:20px;
+color:#aaa;
+flex-wrap:wrap
+}
+
+.foot strong{
+color:white;
+display:block;
+margin-bottom:5px
+}
+
+.modal{
+position:fixed;
+inset:0;
+background:#000b;
+z-index:50;
+display:none;
+align-items:flex-end;
+justify-content:center
+}
+
+.modal.open{display:flex}
+
+.drawer{
+width:min(620px,100%);
+max-height:92vh;
+overflow:auto;
+background:#111;
+border:1px solid #292929;
+border-radius:20px 20px 0 0;
+padding:22px
+}
+
+.drawer h2{margin-top:0}
+
+.close{
+float:right;
+border:0;
+background:#252525;
+color:#fff;
+border-radius:9px;
+padding:8px 12px
+}
+
+.cartitem{
+display:flex;
+gap:12px;
+border-bottom:1px solid #292929;
+padding:14px 0
+}
+
+.cartitem img{
+width:64px;
+height:64px;
+object-fit:cover;
+border-radius:9px
+}
+
+.qty{
+display:flex;
+align-items:center;
+gap:8px
+}
+
+.qty button{
+width:28px;
+height:28px;
+border-radius:7px;
+border:1px solid #444;
+background:#222;
+color:#fff
+}
+
+.total{
+display:flex;
+justify-content:space-between;
+font-size:20px;
+font-weight:900;
+padding:18px 0
+}
+
+.field{margin:10px 0}
+
+.field label{
+display:block;
+color:#bbb;
+font-size:13px;
+margin-bottom:5px
+}
+
+.field input,
+.field textarea,
+.field select{
+width:100%;
+padding:12px;
+border-radius:9px;
+border:1px solid #333;
+background:#191919;
+color:#fff
+}
+
+.field textarea{
+min-height:80px;
+resize:vertical
+}
+
+.notice{
+background:#151515;
+border:1px solid #2b2b2b;
+padding:12px;
+border-radius:10px;
+color:#bbb;
+font-size:13px
+}
+
+.admin{
+max-width:1180px;
+margin:auto;
+padding:35px 20px;
+display:none
+}
+
+.admin.active{display:block}
+
+.adminbar{
+display:flex;
+justify-content:space-between;
+gap:10px;
+align-items:center;
+margin-bottom:20px
+}
+
+.productrow{
+display:grid;
+grid-template-columns:80px 1fr auto auto;
+gap:14px;
+align-items:center;
+background:#131313;
+border:1px solid #292929;
+border-radius:12px;
+padding:10px;
+margin:8px 0
+}
+
+.productrow img{
+width:80px;
+height:65px;
+object-fit:cover;
+border-radius:8px
+}
+
+.actions{
+display:flex;
+gap:7px
+}
+
+.secondary,.danger{
+border:1px solid #3a3a3a;
+background:#1d1d1d;
+color:#fff;
+border-radius:8px;
+padding:9px 12px
+}
+
+.danger{
+border-color:#5b2020;
+color:#ff7777
+}
+
+.adminform{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+background:#131313;
+padding:18px;
+border-radius:14px;
+margin-top:18px
+}
+
+.adminform .full{
+grid-column:1/-1
+}
+
+.adminform button{margin-top:5px}
+
+.hidden{
+display:none!important
+}
+
+.toast{
+position:fixed;
+right:18px;
+bottom:18px;
+background:#181818;
+border:1px solid #333;
+padding:13px 16px;
+border-radius:10px;
+display:none;
+z-index:80
+}
+
+.toast.show{display:block}
+
+@media(max-width:900px){
+.grid{
+grid-template-columns:repeat(2,1fr)
+}
+
+.hero{
+grid-template-columns:1fr
+}
+
+.heroimg{
+height:280px
+}
+
+.links{
+display:none
+}
+}
+
+/* CELULAR - PRATOS MENORES E MAIS BONITOS */
 @media(max-width:600px){
-.grid{grid-template-columns:1fr}
-.nav{padding:8px 10px}
-.logo{font-size:20px}
-.logo span{font-size:10px}
-.cartbtn{padding:9px 11px;font-size:12px}
-.secondary{padding:7px 9px;font-size:12px}
-.hero{padding:20px 12px;min-height:0}
-.hero h1{font-size:46px}
-.hero h1 span{margin-left:22px;margin-top:8px}
-.hero p{font-size:14px}
-.benefits{gap:7px;margin:15px 0;font-size:12px}
-.heroimg{height:190px}
-section{padding:22px 12px}
-.sectiontitle{font-size:20px}
-.card img{height:135px}
-.cardbody{padding:10px}
-.card h3{font-size:15px}
-.desc{font-size:12px;min-height:38px}
-.price{font-size:16px}
-.add{width:34px;height:34px;font-size:21px}
-.productrow{grid-template-columns:50px 1fr}
-.productrow img{width:50px;height:45px}
-.productrow .actions{grid-column:2}
-.adminform{grid-template-columns:1fr}
-.adminform .full{grid-column:auto}
+
+.grid{
+grid-template-columns:repeat(2,1fr);
+gap:9px
+}
+
+.nav{
+padding:10px 12px
+}
+
+.logo{
+font-size:21px
+}
+
+.logo span{
+font-size:11px
+}
+
+.hero{
+padding:28px 14px
+}
+
+.hero h1{
+font-size:50px
+}
+
+.hero h1 span{
+margin-left:25px
+}
+
+.hero p{
+font-size:15px
+}
+
+.benefits{
+gap:8px;
+font-size:13px
+}
+
+.heroimg{
+height:220px
+}
+
+section{
+padding:25px 12px
+}
+
+.sectiontitle{
+font-size:21px;
+margin-bottom:15px
+}
+
+/* SOMENTE VISUAL DOS PRATOS */
+.card{
+border-radius:11px
+}
+
+.card img{
+height:115px
+}
+
+.cardbody{
+padding:9px
+}
+
+.card h3{
+font-size:14px;
+line-height:1.2;
+margin-bottom:5px
+}
+
+.desc{
+font-size:11px;
+line-height:1.3;
+min-height:38px
+}
+
+.row{
+margin-top:8px
+}
+
+.price{
+font-size:15px
+}
+
+.add{
+width:34px;
+height:34px;
+font-size:22px
+}
+
+.productrow{
+grid-template-columns:60px 1fr
+}
+
+.productrow img{
+width:60px;
+height:55px
+}
+
+.productrow .actions{
+grid-column:2
+}
+
+.adminform{
+grid-template-columns:1fr
+}
+
+.adminform .full{
+grid-column:auto
+}
+}
+
+@media(max-width:380px){
+
+.card img{
+height:105px
+}
+
+.cardbody{
+padding:8px
+}
+
+.card h3{
+font-size:13px
+}
+
+.desc{
+font-size:10px
+}
+
+.price{
+font-size:14px
+}
+
+.add{
+width:32px;
+height:32px;
+font-size:21px
+}
 }
 </style>
 </head>
+
 <body>
 
-<header><div class="nav">
-<a href="#" class="logo" style="text-decoration:none;color:#fff">HIKARI<span>YAKISOBA 光</span></a>
-<nav class="links"><a href="#inicio">Início</a><a href="#cardapio">Cardápio</a><a href="#como">Como funciona</a><a href="#contato">Fale conosco</a></nav>
-<div style="display:flex;gap:8px;align-items:center"><button class="secondary" onclick="openLogin()">⚙️ Admin</button><button class="cartbtn" onclick="openCart()">🛍️ Meu pedido (<span id="cartCount">0</span>)</button></div>
-</div></header>
+<header>
+<div class="nav">
+
+<a href="#" class="logo" style="text-decoration:none;color:#fff">
+HIKARI
+<span>YAKISOBA 光</span>
+</a>
+
+<nav class="links">
+<a href="#inicio">Início</a>
+<a href="#cardapio">Cardápio</a>
+<a href="#como">Como funciona</a>
+<a href="#contato">Fale conosco</a>
+</nav>
+
+<div style="display:flex;gap:8px;align-items:center">
+<button class="secondary" onclick="openLogin()">⚙️ Admin</button>
+<button class="cartbtn" onclick="openCart()">🛍️ Meu pedido (<span id="cartCount">0</span>)</button>
+</div>
+
+</div>
+</header>
 
 <main id="site">
+
 <section class="hero" id="inicio">
-<div><div class="eyebrow">PEDIDO ONLINE</div><h1>HIKARI<span>YAKISOBA 光</span></h1>
-<p>O verdadeiro yakisoba, preparado na hora com ingredientes selecionados e muito sabor.</p>
-<div class="benefits"><div>🥢 Ingredientes frescos</div><div>🔥 Feito na hora</div><div>🛵 Entrega rápida</div></div>
-<button class="primary" onclick="document.querySelector('#cardapio').scrollIntoView()">🛵 FAZER PEDIDO AGORA</button></div>
-<div class="heroimg"><img id="heroImage" src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1000&q=85" alt="Yakisoba"></div>
+
+<div>
+<div class="eyebrow">PEDIDO ONLINE</div>
+
+<h1>
+HIKARI
+<span>YAKISOBA 光</span>
+</h1>
+
+<p>
+O verdadeiro yakisoba, preparado na hora com ingredientes selecionados e muito sabor.
+</p>
+
+<div class="benefits">
+<div>🥢 Ingredientes frescos</div>
+<div>🔥 Feito na hora</div>
+<div>🛵 Entrega rápida</div>
+</div>
+
+<button class="primary" onclick="document.querySelector('#cardapio').scrollIntoView()">
+🛵 FAZER PEDIDO AGORA
+</button>
+
+</div>
+
+<div class="heroimg">
+<img id="heroImage"
+src="https://images.unsplash.com/photo-1612929633738-8fe44f7ec841?auto=format&fit=crop&w=1000&q=85"
+alt="Yakisoba">
+</div>
+
 </section>
 
-<section id="cardapio"><div class="sectiontitle">DESTAQUES</div><div class="grid" id="productGrid"></div></section>
+<section id="cardapio">
 
-<section id="como"><div class="sectiontitle">COMO FUNCIONA</div><div class="grid" style="grid-template-columns:repeat(3,1fr)">
-<div class="card"><div class="cardbody"><h3>1. Escolha</h3><p class="desc">Monte seu pedido pelo cardápio.</p></div></div>
-<div class="card"><div class="cardbody"><h3>2. Confirme</h3><p class="desc">Informe seus dados e confirme.</p></div></div>
-<div class="card"><div class="cardbody"><h3>3. Pague</h3><p class="desc">Receba as instruções de Pix pelo WhatsApp.</p></div></div>
-</div></section>
+<div class="sectiontitle">DESTAQUES</div>
+
+<div class="grid" id="productGrid"></div>
+
+</section>
+
+<section id="como">
+
+<div class="sectiontitle">COMO FUNCIONA</div>
+
+<div class="grid" style="grid-template-columns:repeat(3,1fr)">
+
+<div class="card">
+<div class="cardbody">
+<h3>1. Escolha</h3>
+<p class="desc">Monte seu pedido pelo cardápio.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cardbody">
+<h3>2. Confirme</h3>
+<p class="desc">Informe seus dados e confirme.</p>
+</div>
+</div>
+
+<div class="card">
+<div class="cardbody">
+<h3>3. Pague</h3>
+<p class="desc">Receba as instruções de Pix pelo WhatsApp.</p>
+</div>
+</div>
+
+</div>
+</section>
+
 </main>
 
 <section class="admin" id="admin">
-<div class="adminbar"><div><div class="eyebrow">HIKARI YAKISOBA</div><h2 style="margin:4px 0">Painel administrativo</h2></div>
-<div style="display:flex;gap:8px"><button class="secondary" onclick="logoutAdmin()">Sair</button><button class="primary" onclick="newProduct()">＋ Adicionar produto</button></div></div>
+
+<div class="adminbar">
+
+<div>
+<div class="eyebrow">HIKARI YAKISOBA</div>
+<h2 style="margin:4px 0">Painel administrativo</h2>
+</div>
+
+<div style="display:flex;gap:8px">
+<button class="secondary" onclick="logoutAdmin()">Sair</button>
+<button class="primary" onclick="newProduct()">＋ Adicionar produto</button>
+</div>
+
+</div>
+
 <div id="adminList"></div>
 
 <form class="adminform hidden" id="productForm" onsubmit="saveProduct(event)">
+
 <input type="hidden" id="pid">
-<div class="field"><label>Nome</label><input id="pname" required></div>
-<div class="field"><label>Preço (R$)</label><input id="pprice" type="number" step="0.01" required></div>
-<div class="field full"><label>Descrição</label><textarea id="pdesc" required></textarea></div>
-<div class="field"><label>Categoria</label><select id="pcat"><option>Yakisoba</option><option>Bebidas</option><option>Adicionais</option><option>Combos</option></select></div>
-<div class="field"><label>URL da foto</label><input id="pimg" placeholder="https://..."></div>
-<div class="field full"><label>Ou escolha uma foto do celular/computador</label><input id="pfile" type="file" accept="image/*"></div>
-<div class="full"><button class="primary" type="submit">Salvar produto</button> <button class="secondary" type="button" onclick="cancelEdit()">Cancelar</button></div>
+
+<div class="field">
+<label>Nome</label>
+<input id="pname" required>
+</div>
+
+<div class="field">
+<label>Preço (R$)</label>
+<input id="pprice" type="number" step="0.01" required>
+</div>
+
+<div class="field full">
+<label>Descrição</label>
+<textarea id="pdesc" required></textarea>
+</div>
+
+<div class="field">
+<label>Categoria</label>
+<select id="pcat">
+<option>Yakisoba</option>
+<option>Bebidas</option>
+<option>Adicionais</option>
+<option>Combos</option>
+</select>
+</div>
+
+<div class="field">
+<label>URL da foto</label>
+<input id="pimg" placeholder="https://...">
+</div>
+
+<div class="field full">
+<label>Ou escolha uma foto do celular/computador</label>
+<input id="pfile" type="file" accept="image/*">
+</div>
+
+<div class="full">
+<button class="primary" type="submit">Salvar produto</button>
+<button class="secondary" type="button" onclick="cancelEdit()">Cancelar</button>
+</div>
+
 </form>
+
 </section>
 
-<footer id="contato"><div class="foot">
-<div><strong>🕒 Atendimento</strong>Segunda a Domingo · 18h às 23:30</div>
-<div><strong>🛵 Entrega</strong>Consulte a região no pedido</div>
-<div><strong>💳 Pagamento</strong>Pix enviado pelo WhatsApp</div>
-<div><strong>🔒 Segurança</strong>Seus dados ficam somente com a Hikari</div>
-</div></footer>
+<footer id="contato">
 
-<div class="modal" id="cartModal"><div class="drawer">
-<button class="close" onclick="closeCart()">✕</button><h2>Seu pedido</h2><div id="cartItems"></div>
-<div class="total"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
-<div class="field"><label>Tipo de pedido</label><select id="orderType" onchange="toggleAddress()"><option value="Entrega">Entrega</option><option value="Retirada">Retirada no balcão</option></select></div>
-<div id="addressFields">
-<div class="field"><label>Nome</label><input id="custName" placeholder="Seu nome"></div>
-<div class="field"><label>WhatsApp</label><input id="custPhone" placeholder="(51) 99999-9999"></div>
-<div class="field"><label>Endereço</label><textarea id="custAddress" placeholder="Rua, número, bairro"></textarea></div>
+<div class="foot">
+
+<div>
+<strong>🕒 Atendimento</strong>
+Segunda a Domingo · 18h às 23:30
 </div>
-<div class="field"><label>Observação</label><textarea id="custNote" placeholder="Ex.: sem cebola, pouco molho..."></textarea></div>
-<div class="notice">Ao confirmar, o pedido será montado automaticamente e enviado para o WhatsApp da Hikari. A Hikari responderá com as instruções do Pix.</div>
-<button class="primary" style="width:100%;margin-top:12px" onclick="sendWhatsApp()">📲 CONFIRMAR E ENVIAR PELO WHATSAPP</button>
-</div></div>
+
+<div>
+<strong>🛵 Entrega</strong>
+Consulte a região no pedido
+</div>
+
+<div>
+<strong>💳 Pagamento</strong>
+Pix enviado pelo WhatsApp
+</div>
+
+<div>
+<strong>🔒 Segurança</strong>
+Seus dados ficam somente com a Hikari
+</div>
+
+</div>
+
+</footer>
+
+<div class="modal" id="cartModal">
+
+<div class="drawer">
+
+<button class="close" onclick="closeCart()">✕</button>
+
+<h2>Seu pedido</h2>
+
+<div id="cartItems"></div>
+
+<div class="total">
+<span>Total</span>
+<span id="cartTotal">R$ 0,00</span>
+</div>
+
+<div class="field">
+<label>Tipo de pedido</label>
+
+<select id="orderType" onchange="toggleAddress()">
+<option value="Entrega">Entrega</option>
+<option value="Retirada">Retirada no balcão</option>
+</select>
+
+</div>
+
+<div id="addressFields">
+
+<div class="field">
+<label>Nome</label>
+<input id="custName" placeholder="Seu nome">
+</div>
+
+<div class="field">
+<label>WhatsApp</label>
+<input id="custPhone" placeholder="(51) 99999-9999">
+</div>
+
+<div class="field">
+<label>Endereço</label>
+<textarea id="custAddress" placeholder="Rua, número, bairro"></textarea>
+</div>
+
+</div>
+
+<div class="field">
+<label>Observação</label>
+<textarea id="custNote" placeholder="Ex.: sem cebola, pouco molho..."></textarea>
+</div>
+
+<div class="notice">
+Ao confirmar, o pedido será montado automaticamente e enviado para o WhatsApp da Hikari. A Hikari responderá com as instruções do Pix.
+</div>
+
+<button class="primary" style="width:100%;margin-top:12px" onclick="sendWhatsApp()">
+📲 CONFIRMAR E ENVIAR PELO WHATSAPP
+</button>
+
+</div>
+</div>
 
 <div class="modal" id="loginModal" style="align-items:center">
+
 <div class="drawer" style="width:min(420px,92%);border-radius:18px">
+
 <div style="text-align:center;margin-bottom:18px">
-<div class="logo" style="display:inline-block">HIKARI<span>YAKISOBA 光</span></div>
-<h2 style="margin-bottom:5px">Painel Administrativo</h2>
-<div style="color:#aaa;font-size:13px">Entre para gerenciar seu cardápio</div>
+
+<div class="logo" style="display:inline-block">
+HIKARI
+<span>YAKISOBA 光</span>
 </div>
-<div class="field"><label>Usuário</label><input id="loginUser" autocomplete="username" placeholder="Usuário"></div>
-<div class="field"><label>Senha</label><input id="loginPass" type="password" autocomplete="current-password" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()"></div>
-<div id="loginError" style="color:#ff6666;font-size:13px;display:none;margin:8px 0">Usuário ou senha incorretos.</div>
-<button class="primary" style="width:100%;margin-top:8px" onclick="doLogin()">ENTRAR NO PAINEL</button>
-<button class="secondary" style="width:100%;margin-top:9px" onclick="closeLogin()">Voltar ao site</button>
-</div></div>
+
+<h2 style="margin-bottom:5px">Painel Administrativo</h2>
+
+<div style="color:#aaa;font-size:13px">
+Entre para gerenciar seu cardápio
+</div>
+
+</div>
+
+<div class="field">
+<label>Usuário</label>
+<input id="loginUser" autocomplete="username" placeholder="Usuário">
+</div>
+
+<div class="field">
+<label>Senha</label>
+<input id="loginPass" type="password" autocomplete="current-password" placeholder="Senha" onkeydown="if(event.key==='Enter')doLogin()">
+</div>
+
+<div id="loginError" style="color:#ff6666;font-size:13px;display:none;margin:8px 0">
+Usuário ou senha incorretos.
+</div>
+
+<button class="primary" style="width:100%;margin-top:8px" onclick="doLogin()">
+ENTRAR NO PAINEL
+</button>
+
+<button class="secondary" style="width:100%;margin-top:9px" onclick="closeLogin()">
+Voltar ao site
+</button>
+
+</div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
+
 let products=[];
 let cart=JSON.parse(localStorage.getItem("hikari_cart")||"[]");
+
 const BRL=n=>n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 
-function save(){localStorage.setItem("hikari_products",JSON.stringify(products));localStorage.setItem("hikari_cart",JSON.stringify(cart))}
+function save(){
+localStorage.setItem("hikari_products",JSON.stringify(products));
+localStorage.setItem("hikari_cart",JSON.stringify(cart))
+}
 
 function render(){
-document.getElementById("productGrid").innerHTML=products.map(p=>`<article class="card"><img src="${p.img}" alt="${esc(p.name)}"><div class="cardbody"><h3>${esc(p.name)}</h3><div class="desc">${esc(p.desc)}</div><div class="row"><span class="price">${BRL(p.price)}</span><button class="add" onclick="add(${p.id})">+</button></div></div></article>`).join("");
-renderAdmin();renderCart();
+
+document.getElementById("productGrid").innerHTML=products.map(p=>`
+<article class="card">
+
+<img src="${p.img}" alt="${esc(p.name)}">
+
+<div class="cardbody">
+
+<h3>${esc(p.name)}</h3>
+
+<div class="desc">${esc(p.desc)}</div>
+
+<div class="row">
+
+<span class="price">${BRL(p.price)}</span>
+
+<button class="add" onclick="add(${p.id})">+</button>
+
+</div>
+
+</div>
+
+</article>
+`).join("");
+
+renderAdmin();
+renderCart();
+
 }
 
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function esc(s){
+return String(s).replace(/[&<>"']/g,m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m]))
+}
 
-function add(id){let x=cart.find(i=>i.id===id);if(x)x.q++;else cart.push({id,q:1});save();renderCart();toast("Produto adicionado ao pedido!")}
+function add(id){
+
+let x=cart.find(i=>i.id===id);
+
+if(x)x.q++;
+else cart.push({id,q:1});
+
+save();
+renderCart();
+toast("Produto adicionado ao pedido!")
+
+}
 
 function renderCart(){
-let count=cart.reduce((a,b)=>a+b.q,0),total=0;
+
+let count=cart.reduce((a,b)=>a+b.q,0);
+let total=0;
+
 document.getElementById("cartCount").textContent=count;
-document.getElementById("cartItems").innerHTML=cart.length?cart.map(i=>{let p=products.find(x=>x.id===i.id);if(!p)return"";total+=p.price*i.q;return`<div class="cartitem"><img src="${p.img}"><div style="flex:1"><b>${esc(p.name)}</b><div>${BRL(p.price)}</div><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${i.q}</span><button onclick="changeQty(${p.id},1)">+</button></div></div></div>`}).join(""):`<p style="color:#aaa">Seu pedido está vazio.</p>`;
+
+document.getElementById("cartItems").innerHTML=cart.length?
+cart.map(i=>{
+
+let p=products.find(x=>x.id===i.id);
+
+if(!p)return"";
+
+total+=p.price*i.q;
+
+return`
+<div class="cartitem">
+
+<img src="${p.img}">
+
+<div style="flex:1">
+
+<b>${esc(p.name)}</b>
+
+<div>${BRL(p.price)}</div>
+
+<div class="qty">
+
+<button onclick="changeQty(${p.id},-1)">−</button>
+
+<span>${i.q}</span>
+
+<button onclick="changeQty(${p.id},1)">+</button>
+
+</div>
+
+</div>
+
+</div>
+`
+
+}).join("")
+:
+`<p style="color:#aaa">Seu pedido está vazio.</p>`;
+
 document.getElementById("cartTotal").textContent=BRL(total)
+
 }
 
-function changeQty(id,d){let i=cart.find(x=>x.id===id);if(!i)return;i.q+=d;if(i.q<=0)cart=cart.filter(x=>x.id!==id);save();renderCart()}
+function changeQty(id,d){
 
-function openCart(){document.getElementById("cartModal").classList.add("open");renderCart()}
-function closeCart(){document.getElementById("cartModal").classList.remove("open")}
+let i=cart.find(x=>x.id===id);
 
-function toggleAddress(){document.getElementById("addressFields").style.display=document.getElementById("orderType").value==="Entrega"?"block":"none"}
+if(!i)return;
+
+i.q+=d;
+
+if(i.q<=0)
+cart=cart.filter(x=>x.id!==id);
+
+save();
+renderCart()
+
+}
+
+function openCart(){
+document.getElementById("cartModal").classList.add("open");
+renderCart()
+}
+
+function closeCart(){
+document.getElementById("cartModal").classList.remove("open")
+}
+
+function toggleAddress(){
+
+document.getElementById("addressFields").style.display=
+document.getElementById("orderType").value==="Entrega"?"block":"none"
+
+}
 
 function sendWhatsApp(){
-if(!cart.length)return toast("Adicione algum produto primeiro.");
+
+if(!cart.length)
+return toast("Adicione algum produto primeiro.");
+
 let total=0;
-let lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.q;return`${i.q}x ${p.name} — ${BRL(p.price*i.q)}`}).join("%0A");
-let type=document.getElementById("orderType").value,name=document.getElementById("custName").value.trim(),phone=document.getElementById("custPhone").value.trim(),addr=document.getElementById("custAddress").value.trim(),note=document.getElementById("custNote").value.trim();
-if(!name||!phone||(type==="Entrega"&&!addr))return toast("Preencha os dados do pedido.");
-const hikariWhatsApp=localStorage.getItem("hikari_whatsapp")||"5551999999999";
-let msg=`Olá, Hikari! Quero fazer um pedido.%0A%0A${lines}%0A%0ATotal: ${BRL(total)}%0ATipo: ${type}%0ANome: ${encodeURIComponent(name)}%0AWhatsApp: ${encodeURIComponent(phone)}%0A${type==="Entrega"?"Endereço: "+encodeURIComponent(addr)+"%0A":""}${note?"Observação: "+encodeURIComponent(note):""}`;
-window.open(`https://wa.me/${hikariWhatsApp}?text=${msg}`,"_blank");
+
+let lines=cart.map(i=>{
+
+let p=products.find(x=>x.id===i.id);
+
+total+=p.price*i.q;
+
+return`${i.q}x ${p.name} — ${BRL(p.price*i.q)}`
+
+}).join("%0A");
+
+let type=document.getElementById("orderType").value;
+
+let name=document.getElementById("custName").value.trim();
+
+let phone=document.getElementById("custPhone").value.trim();
+
+let addr=document.getElementById("custAddress").value.trim();
+
+let note=document.getElementById("custNote").value.trim();
+
+if(!name||!phone||(type==="Entrega"&&!addr))
+return toast("Preencha os dados do pedido.");
+
+const hikariWhatsApp=
+localStorage.getItem("hikari_whatsapp")||"5551999999999";
+
+let msg=
+`Olá, Hikari! Quero fazer um pedido.%0A%0A${lines}%0A%0ATotal: ${BRL(total)}%0ATipo: ${type}%0ANome: ${encodeURIComponent(name)}%0AWhatsApp: ${encodeURIComponent(phone)}%0A${type==="Entrega"?"Endereço: "+encodeURIComponent(addr)+"%0A":""}${note?"Observação: "+encodeURIComponent(note):""}`;
+
+window.open(
+`https://wa.me/${hikariWhatsApp}?text=${msg}`,
+"_blank"
+);
+
 }
 
 function renderAdmin(){
-if(!document.getElementById("admin").classList.contains("active"))return;
-document.getElementById("adminList").innerHTML=products.map(p=>`<div class="productrow"><img src="${p.img}"><div><b>${esc(p.name)}</b><div style="color:#aaa;font-size:13px">${esc(p.desc)}</div></div><strong>${BRL(p.price)}</strong><div class="actions"><button class="secondary" onclick="editProduct(${p.id})">✏️ Editar</button><button class="danger" onclick="deleteProduct(${p.id})">🗑️ Excluir</button></div></div>`).join("")
+
+if(!document.getElementById("admin").classList.contains("active"))
+return;
+
+document.getElementById("adminList").innerHTML=
+products.map(p=>`
+
+<div class="productrow">
+
+<img src="${p.img}">
+
+<div>
+<b>${esc(p.name)}</b>
+<div style="color:#aaa;font-size:13px">
+${esc(p.desc)}
+</div>
+</div>
+
+<strong>${BRL(p.price)}</strong>
+
+<div class="actions">
+
+<button class="secondary" onclick="editProduct(${p.id})">
+✏️ Editar
+</button>
+
+<button class="danger" onclick="deleteProduct(${p.id})">
+🗑️ Excluir
+</button>
+
+</div>
+
+</div>
+
+`).join("")
+
 }
 
 function newProduct(){
+
 document.getElementById("productForm").classList.remove("hidden");
-["pid","pname","pprice","pdesc","pimg"].forEach(x=>document.getElementById(x).value="");
+
+["pid","pname","pprice","pdesc","pimg"]
+.forEach(x=>document.getElementById(x).value="");
+
 document.getElementById("pfile").value=""
+
 }
 
 function editProduct(id){
+
 let p=products.find(x=>x.id===id);
+
 document.getElementById("productForm").classList.remove("hidden");
+
 document.getElementById("pid").value=p.id;
 document.getElementById("pname").value=p.name;
 document.getElementById("pprice").value=p.price;
@@ -194,77 +1175,231 @@ document.getElementById("pdesc").value=p.desc;
 document.getElementById("pcat").value=p.cat;
 document.getElementById("pimg").value=p.img;
 document.getElementById("pfile").value="";
-scrollTo({top:document.getElementById("admin").offsetTop,behavior:"smooth"})
+
+scrollTo({
+top:document.getElementById("admin").offsetTop,
+behavior:"smooth"
+})
+
 }
 
 function saveProduct(e){
+
 e.preventDefault();
-let id=+document.getElementById("pid").value;
-let p={id:id||Date.now(),name:document.getElementById("pname").value.trim(),desc:document.getElementById("pdesc").value.trim(),price:+document.getElementById("pprice").value,cat:document.getElementById("pcat").value,img:document.getElementById("pimg").value.trim()||""};
-let file=document.getElementById("pfile").files[0];
-const finish=(img)=>{p.img=img;if(id)products=products.map(x=>x.id===id?p:x);else products.push(p);save();render();cancelEdit();toast("Produto salvo!")};
-if(file){let r=new FileReader();r.onload=()=>finish(r.result);r.readAsDataURL(file)}else finish(p.img)
+
+const id=+document.getElementById("pid").value;
+
+let p={
+name:document.getElementById("pname").value.trim(),
+desc:document.getElementById("pdesc").value.trim(),
+price:+document.getElementById("pprice").value,
+cat:document.getElementById("pcat").value,
+img:document.getElementById("pimg").value.trim()
+};
+
+const file=document.getElementById("pfile").files[0];
+
+const send=async(img)=>{
+
+p.img=img||"";
+
+const url=id?`/api/products/${id}`:"/api/products";
+
+const method=id?"PUT":"POST";
+
+const r=await fetch(url,{
+method,
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify(p)
+});
+
+if(!r.ok){
+toast("Erro ao salvar produto.");
+return
 }
 
-function cancelEdit(){document.getElementById("productForm").classList.add("hidden")}
+await loadProducts();
+cancelEdit();
+toast("Produto salvo!");
+
+};
+
+if(file){
+
+const reader=new FileReader();
+
+reader.onload=()=>send(reader.result);
+
+reader.readAsDataURL(file)
+
+}else send(p.img)
+
+}
+
+function cancelEdit(){
+document.getElementById("productForm").classList.add("hidden")
+}
 
 function deleteProduct(id){
+
 let p=products.find(x=>x.id===id);
-if(confirm(`Excluir "${p.name}"?`)){products=products.filter(x=>x.id!==id);cart=cart.filter(x=>x.id!==id);save();render();toast("Produto excluído.")}
+
+if(confirm(`Excluir "${p.name}"?`)){
+
+fetch(`/api/products/${id}`,{
+method:"DELETE"
+}).then(r=>{
+
+if(r.ok){
+
+cart=cart.filter(x=>x.id!==id);
+
+save();
+loadProducts();
+toast("Produto excluído.")
+
+}else{
+
+toast("Não foi possível excluir.")
+
+}
+
+})
+
+}
+
 }
 
 function toast(t){
+
 let x=document.getElementById("toast");
+
 x.textContent=t;
+
 x.classList.add("show");
-setTimeout(()=>x.classList.remove("show"),2200)
+
+setTimeout(
+()=>x.classList.remove("show"),
+2200
+)
+
 }
 
 async function loadProducts(){
+
 try{
+
 const r=await fetch("/api/products");
+
 products=await r.json();
+
 render();
-}catch(e){toast("Não foi possível carregar o cardápio.")}
+
+}catch(e){
+
+toast("Não foi possível carregar o cardápio.");
+
 }
 
-function openLogin(){document.getElementById("loginModal").classList.add("open");document.getElementById("loginUser").focus()}
-function closeLogin(){document.getElementById("loginModal").classList.remove("open");document.getElementById("loginError").style.display="none"}
+}
+
+function openLogin(){
+
+document.getElementById("loginModal").classList.add("open");
+
+document.getElementById("loginUser").focus()
+
+}
+
+function closeLogin(){
+
+document.getElementById("loginModal").classList.remove("open");
+
+document.getElementById("loginError").style.display="none"
+
+}
 
 async function doLogin(){
+
 const u=document.getElementById("loginUser").value.trim();
+
 const p=document.getElementById("loginPass").value;
+
 try{
-const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({username:u,password:p})});
-if(!r.ok)throw new Error();
+
+const r=await fetch("/api/login",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username:u,
+password:p
+})
+});
+
+if(!r.ok)
+throw new Error();
+
 sessionStorage.setItem("hikari_admin","1");
+
 closeLogin();
+
 showAdmin();
-}catch(e){document.getElementById("loginError").style.display="block"}
+
+}catch(e){
+
+document.getElementById("loginError").style.display="block";
+
+}
+
 }
 
 async function showAdmin(){
+
 const r=await fetch("/api/me");
-if(!r.ok){openLogin();return}
+
+if(!r.ok){
+openLogin();
+return
+}
+
 document.getElementById("site").classList.add("hidden");
+
 document.getElementById("admin").classList.add("active");
+
 document.getElementById("contato").classList.add("hidden");
+
 await loadProducts();
+
 renderAdmin();
+
 window.scrollTo(0,0)
+
 }
 
 async function logoutAdmin(){
-await fetch("/api/logout",{method:"POST"});
+
+await fetch("/api/logout",{
+method:"POST"
+});
+
 sessionStorage.removeItem("hikari_admin");
+
 document.getElementById("site").classList.remove("hidden");
+
 document.getElementById("admin").classList.remove("active");
+
 document.getElementById("contato").classList.remove("hidden");
+
 toast("Você saiu do painel.")
+
 }
 
 loadProducts();
 toggleAddress();
+
 </script>
+
 </body>
 </html>
