@@ -97,7 +97,7 @@ function toggleAddress(){document.getElementById("addressFields").style.display=
 function sendWhatsApp(){if(!cart.length)return toast("Adicione algum produto primeiro.");let total=0;let lines=cart.map(i=>{let p=products.find(x=>x.id===i.id);total+=p.price*i.q;return`${i.q}x ${p.name} — ${BRL(p.price*i.q)}`}).join("%0A");
 let type=document.getElementById("orderType").value,name=document.getElementById("custName").value.trim(),phone=document.getElementById("custPhone").value.trim(),addr=document.getElementById("custAddress").value.trim(),note=document.getElementById("custNote").value.trim();
 if(!name||!phone||(type==="Entrega"&&!addr))return toast("Preencha os dados do pedido.");
-const hikariWhatsApp=localStorage.getItem("hikari_whatsapp")||"5551999999999";
+const hikariWhatsApp=localStorage.getItem("hikari_whatsapp")||"5551997492824";
 let msg=`Olá, Hikari! Quero fazer um pedido.%0A%0A${lines}%0A%0ATotal: ${BRL(total)}%0ATipo: ${type}%0ANome: ${encodeURIComponent(name)}%0AWhatsApp: ${encodeURIComponent(phone)}%0A${type==="Entrega"?"Endereço: "+encodeURIComponent(addr)+"%0A":""}${note?"Observação: "+encodeURIComponent(note):""}`;
 window.open(`https://wa.me/${hikariWhatsApp}?text=${msg}`,"_blank");
 }
