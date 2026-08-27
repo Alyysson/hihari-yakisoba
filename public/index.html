@@ -26,7 +26,10 @@ color:var(--t);
 font-family:Arial,Helvetica,sans-serif
 }
 
-button,input,textarea,select{font:inherit}
+button,input,textarea,select{
+font:inherit
+}
+
 button{cursor:pointer}
 
 header{
@@ -520,6 +523,7 @@ font-size:21px
 }
 
 }
+
 </style>
 </head>
 
@@ -564,9 +568,9 @@ Preparado na hora com ingredientes selecionados e muito sabor.
 </p>
 
 <div class="benefits">
-<div>🥢 Fresco</div>
-<div>🔥 Na hora</div>
-<div>🛵 Entrega</div>
+<div>🥢 Ingredientes frescos</div>
+<div>🔥 Feito na hora</div>
+<div>🛵 Entrega rápida</div>
 </div>
 
 <button class="primary"
@@ -783,12 +787,19 @@ sizes:{
 let cart = [];
 
 try{
+
 cart = JSON.parse(
 localStorage.getItem("hikari_cart") || "[]"
 );
-if(!Array.isArray(cart)) cart=[];
-}catch(e){
+
+if(!Array.isArray(cart)){
 cart=[];
+}
+
+}catch(e){
+
+cart=[];
+
 }
 
 const selectedSize = {};
@@ -898,7 +909,9 @@ document
 size==="800 g"
 );
 
-const p=menu.find(x=>x.id===id);
+const p=menu.find(
+x=>x.id===id
+);
 
 document
 .getElementById(`price-${id}`)
@@ -908,7 +921,9 @@ document
 
 function add(id){
 
-const p=menu.find(x=>x.id===id);
+const p=menu.find(
+x=>x.id===id
+);
 
 if(!p)return;
 
@@ -962,7 +977,8 @@ renderCart();
 function renderCart(){
 
 const count=cart.reduce(
-(sum,item)=>sum+Number(item.q||0),
+(sum,item)=>
+sum+Number(item.q||0),
 0
 );
 
@@ -1001,7 +1017,8 @@ const price=p.sizes[item.size];
 
 const quantity=Number(item.q);
 
-const subtotal=price*quantity;
+const subtotal=
+price*quantity;
 
 total+=subtotal;
 
@@ -1095,30 +1112,37 @@ function sendWhatsApp(){
 
 if(!cart.length){
 
-toast("Adicione algum produto primeiro.");
+toast(
+"Adicione algum produto primeiro."
+);
 
 return;
 
 }
 
 const name=
-document.getElementById("custName")
+document
+.getElementById("custName")
 .value.trim();
 
 const phone=
-document.getElementById("custPhone")
+document
+.getElementById("custPhone")
 .value.trim();
 
 const addr=
-document.getElementById("custAddress")
+document
+.getElementById("custAddress")
 .value.trim();
 
 const note=
-document.getElementById("custNote")
+document
+.getElementById("custNote")
 .value.trim();
 
 const type=
-document.getElementById("orderType")
+document
+.getElementById("orderType")
 .value;
 
 if(!name){
@@ -1157,7 +1181,8 @@ if(!p)return"";
 
 const price=p.sizes[item.size];
 
-const quantity=Number(item.q);
+const quantity=
+Number(item.q);
 
 const subtotal=
 price*quantity;
