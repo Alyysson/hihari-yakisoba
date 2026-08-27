@@ -26,10 +26,7 @@ color:var(--t);
 font-family:Arial,Helvetica,sans-serif
 }
 
-button,input,textarea,select{
-font:inherit
-}
-
+button,input,textarea,select{font:inherit}
 button{cursor:pointer}
 
 header{
@@ -52,7 +49,9 @@ justify-content:space-between
 .logo{
 font-size:24px;
 font-weight:900;
-font-style:italic
+font-style:italic;
+text-decoration:none;
+color:#fff
 }
 
 .logo span{
@@ -131,7 +130,6 @@ border-left:2px solid var(--r);
 padding-left:9px
 }
 
-/* DESTAQUE - CARNE */
 .heroimg{
 height:340px;
 border-radius:25px;
@@ -175,7 +173,6 @@ border-radius:14px;
 overflow:hidden
 }
 
-/* FOTOS */
 .foodimg{
 height:175px;
 background-size:cover;
@@ -259,8 +256,6 @@ background:var(--r);
 color:#fff;
 font-size:25px
 }
-
-/* CARRINHO */
 
 .modal{
 position:fixed;
@@ -410,8 +405,6 @@ z-index:80
 display:block
 }
 
-/* TABLET */
-
 @media(max-width:900px){
 
 .grid{
@@ -431,8 +424,6 @@ display:none
 }
 
 }
-
-/* CELULAR */
 
 @media(max-width:600px){
 
@@ -529,7 +520,6 @@ font-size:21px
 }
 
 }
-
 </style>
 </head>
 
@@ -538,7 +528,7 @@ font-size:21px
 <header>
 <div class="nav">
 
-<a href="#inicio" class="logo" style="text-decoration:none;color:#fff">
+<a href="#inicio" class="logo">
 HIKARI
 <span>YAKISOBA 光</span>
 </a>
@@ -669,8 +659,6 @@ WhatsApp Hikari
 
 </footer>
 
-<!-- CARRINHO -->
-
 <div class="modal" id="cartModal">
 
 <div class="drawer">
@@ -744,7 +732,7 @@ onclick="sendWhatsApp()">
 
 <script>
 
-const menu=[
+const menu = [
 
 {
 id:"frango",
@@ -792,31 +780,41 @@ sizes:{
 
 ];
 
-let cart=JSON.parse(
-localStorage.getItem("hikari_cart")||"[]"
-);
+let cart = [];
 
-const selectedSize={};
+try{
+cart = JSON.parse(
+localStorage.getItem("hikari_cart") || "[]"
+);
+if(!Array.isArray(cart)) cart=[];
+}catch(e){
+cart=[];
+}
+
+const selectedSize = {};
 
 menu.forEach(p=>{
 selectedSize[p.id]="400 g";
 });
 
-const BRL=n=>n.toLocaleString("pt-BR",{
+const BRL = n =>
+Number(n).toLocaleString("pt-BR",{
 style:"currency",
 currency:"BRL"
 });
 
 function saveCart(){
+
 localStorage.setItem(
 "hikari_cart",
 JSON.stringify(cart)
 );
+
 }
 
 function render(){
 
-document.getElementById("productGrid").innerHTML=
+document.getElementById("productGrid").innerHTML =
 
 menu.map(p=>`
 
@@ -912,23 +910,26 @@ function add(id){
 
 const p=menu.find(x=>x.id===id);
 
-const size=selectedSize[id];
+if(!p)return;
 
-const price=p.sizes[size];
+const size=selectedSize[id];
 
 let item=cart.find(
 x=>x.id===id && x.size===size
 );
 
 if(item){
-item.q++;
+
+item.q=Number(item.q)+1;
+
 }else{
+
 cart.push({
-id,
-size,
-price,
+id:id,
+size:size,
 q:1
 });
+
 }
 
 saveCart();
@@ -940,10 +941,28 @@ toast(
 
 }
 
+function changeQty(index,d){
+
+if(!cart[index])return;
+
+cart[index].q=
+Number(cart[index].q)+d;
+
+if(cart[index].q<=0){
+
+cart.splice(index,1);
+
+}
+
+saveCart();
+renderCart();
+
+}
+
 function renderCart(){
 
 const count=cart.reduce(
-(a,b)=>a+b.q,
+(sum,item)=>sum+Number(item.q||0),
 0
 );
 
@@ -951,19 +970,38 @@ document
 .getElementById("cartCount")
 .textContent=count;
 
+if(!cart.length){
+
+document.getElementById("cartItems").innerHTML=
+`<p style="color:#aaa">
+Seu pedido está vazio.
+</p>`;
+
+document
+.getElementById("cartTotal")
+.textContent=BRL(0);
+
+return;
+
+}
+
 let total=0;
 
 document.getElementById("cartItems").innerHTML=
 
-cart.length?
-
-cart.map((i,index)=>{
+cart.map((item,index)=>{
 
 const p=menu.find(
-x=>x.id===i.id
+x=>x.id===item.id
 );
 
-const subtotal=i.price*i.q;
+if(!p)return"";
+
+const price=p.sizes[item.size];
+
+const quantity=Number(item.q);
+
+const subtotal=price*quantity;
 
 total+=subtotal;
 
@@ -971,7 +1009,8 @@ return`
 
 <div class="cartitem">
 
-<div class="foodimg ${p.class}"
+<div
+class="foodimg ${p.class}"
 style="
 width:62px;
 height:62px;
@@ -985,7 +1024,7 @@ border-radius:9px
 <b>${p.name}</b>
 
 <div class="cartsize">
-${i.size} — ${BRL(i.price)}
+${item.size} — ${BRL(price)}
 </div>
 
 <div class="qty">
@@ -994,7 +1033,7 @@ ${i.size} — ${BRL(i.price)}
 −
 </button>
 
-<span>${i.q}</span>
+<span>${quantity}</span>
 
 <button onclick="changeQty(${index},1)">
 +
@@ -1012,30 +1051,11 @@ ${BRL(subtotal)}
 
 `;
 
-}).join("")
-
-:
-
-`<p style="color:#aaa">
-Seu pedido está vazio.
-</p>`;
+}).join("");
 
 document
 .getElementById("cartTotal")
 .textContent=BRL(total);
-
-}
-
-function changeQty(index,d){
-
-cart[index].q+=d;
-
-if(cart[index].q<=0){
-cart.splice(index,1);
-}
-
-saveCart();
-renderCart();
 
 }
 
@@ -1059,11 +1079,13 @@ document
 
 function toggleAddress(){
 
+const type=
+document.getElementById("orderType").value;
+
 document
 .getElementById("addressFields")
 .style.display=
-
-document.getElementById("orderType").value==="Entrega"
+type==="Entrega"
 ?"block"
 :"none";
 
@@ -1099,13 +1121,25 @@ const type=
 document.getElementById("orderType")
 .value;
 
-if(
-!name||
-!phone||
-(type==="Entrega"&&!addr)
-){
+if(!name){
 
-toast("Preencha os dados do pedido.");
+toast("Digite seu nome.");
+
+return;
+
+}
+
+if(!phone){
+
+toast("Digite seu WhatsApp.");
+
+return;
+
+}
+
+if(type==="Entrega"&&!addr){
+
+toast("Digite seu endereço.");
 
 return;
 
@@ -1113,39 +1147,52 @@ return;
 
 let total=0;
 
-const lines=cart.map(i=>{
+const lines=cart.map(item=>{
 
 const p=menu.find(
-x=>x.id===i.id
+x=>x.id===item.id
 );
 
-const subtotal=i.price*i.q;
+if(!p)return"";
+
+const price=p.sizes[item.size];
+
+const quantity=Number(item.q);
+
+const subtotal=
+price*quantity;
 
 total+=subtotal;
 
-return `${i.q}x ${p.name} — ${i.size} — ${BRL(subtotal)}`;
+return `${quantity}x ${p.name} — ${item.size} — ${BRL(subtotal)}`;
 
-}).join("\n");
-
-const hikariWhatsApp="5551997492824";
+}).filter(Boolean).join("\n");
 
 const message=
-`Olá, Hikari! Quero fazer um pedido.
+`🍜 NOVO PEDIDO - HIKARI YAKISOBA
 
 ${lines}
 
-Total: ${BRL(total)}
+━━━━━━━━━━━━━━
+💰 TOTAL: ${BRL(total)}
+━━━━━━━━━━━━━━
 
-Tipo: ${type}
-Nome: ${name}
-WhatsApp: ${phone}
-${type==="Entrega"?"Endereço: "+addr:""}
-${note?"Observação: "+note:""}`;
+📦 Tipo: ${type}
+👤 Nome: ${name}
+📱 WhatsApp: ${phone}
+${type==="Entrega"?`📍 Endereço: ${addr}`:""}
+${note?`📝 Observação: ${note}`:""}`;
+
+const hikariWhatsApp=
+"5551997492824";
 
 const url=
-`https://wa.me/${hikariWhatsApp}?text=${encodeURIComponent(message)}`;
+"https://wa.me/"+
+hikariWhatsApp+
+"?text="+
+encodeURIComponent(message);
 
-window.open(url,"_blank");
+window.location.href=url;
 
 }
 
@@ -1159,7 +1206,9 @@ el.textContent=text;
 el.classList.add("show");
 
 setTimeout(
-()=>el.classList.remove("show"),
+()=>{
+el.classList.remove("show");
+},
 2200
 );
 
